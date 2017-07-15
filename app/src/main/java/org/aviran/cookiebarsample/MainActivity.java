@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
                 new CookieBar.Builder(MainActivity.this)
                         .setTitle(R.string.cookie_title)
                         .setMessage(R.string.cookie_message)
+                        .setDuration(5000)
                         .show();
             }
         });
@@ -38,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
                         .setTitle(R.string.cookie_title)
                         .setIcon(R.mipmap.ic_launcher)
                         .setMessage(R.string.cookie_message)
+                        .setBackgroundColor(R.color.colorPrimary)
+                        .setActionColor(R.color.colorAccent)
+                        .setTitleColor(R.color.colorAccent)
                         .setLayoutGravity(Gravity.BOTTOM)
                         .setAction(R.string.cookie_action, new OnActionClickListener() {
                             @Override
@@ -56,8 +60,9 @@ public class MainActivity extends AppCompatActivity {
                 new CookieBar.Builder(MainActivity.this)
                         .setTitle(R.string.cookie_title)
                         .setIcon(R.mipmap.ic_launcher)
+                        .setBackgroundColor(R.color.colorAccent)
                         .setMessage(R.string.cookie_message)
-                        .setDuration(3000)
+                        .setDuration(5000)
                         .setAction(R.string.cookie_action, new OnActionClickListener() {
                             @Override
                             public void onClick() {
@@ -75,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 new CookieBar.Builder(MainActivity.this)
                         .setTitle(R.string.cookie_title)
                         .setMessage(R.string.cookie_message)
-                        .setDuration(3000)
+                        .setDuration(5000)
                         .setBackgroundColor(R.color.colorPrimary)
                         .setActionColor(android.R.color.white)
                         .setTitleColor(R.color.colorAccent)

@@ -11,7 +11,7 @@ compile 'org.aviran.cookiebar2:cookiebar2:1.0.0'
 ```
 
 ## Screenshot
-<img src="https://raw.githubusercontent.com/liuguangqiang/CookieBar/master/arts/default.gif" width="30%"> <img src="https://raw.githubusercontent.com/liuguangqiang/CookieBar/master/arts/custom.gif" width="30%">
+<img src="https://raw.githubusercontent.com/AviranAbady/storage/master/cookiebar2.gif">
 
 ## A simple CookieBar.
 ```
