@@ -14,7 +14,7 @@ compile 'org.aviran.cookiebar2:cookiebar2:1.0.0'
 <img src="https://raw.githubusercontent.com/AviranAbady/storage/master/cookiebar2.gif">
 
 ## A simple CookieBar.
-```
+```java
  new CookieBar.Builder(MainActivity.this)
                         .setTitle("TITLE")
                         .setMessage("MESSAGE")
@@ -22,7 +22,7 @@ compile 'org.aviran.cookiebar2:cookiebar2:1.0.0'
 ```
 
 ## A CookieBar with a icon and a action button.
-```
+```java
  new CookieBar.Builder(MainActivity.this)
                         .setTitle("TITLE")
                         .setIcon(R.mipmap.ic_launcher)
@@ -37,7 +37,7 @@ compile 'org.aviran.cookiebar2:cookiebar2:1.0.0'
 
 ## You can change the default style by set the Theme's attributes.
 
-```
+```xml
 <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
    <item name="cookieTitleColor">@color/default_title_color</item>
    <item name="cookieMessageColor">@color/default_message_color</item>
