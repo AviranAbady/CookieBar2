@@ -1,5 +1,6 @@
 package org.aviran.cookiebar2;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -229,7 +230,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     }
 
     public void dismiss(final CookieBarDismissListener listener) {
-        if(swipedOut) {
+        if (swipedOut) {
             destroy();
             return;
         }
@@ -241,7 +242,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
             @Override
             public void onAnimationEnd(final Animation animation) {
-                if(listener != null) {
+                if (listener != null) {
                     listener.onDismiss();
                 }
                 destroy();
@@ -278,7 +279,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
                 return true;
 
             case MotionEvent.ACTION_UP:
-                if(!swipedOut) {
+                if (!swipedOut) {
                     view.animate()
                             .x(0)
                             .alpha(1)
@@ -288,6 +289,9 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
                 return true;
 
             case MotionEvent.ACTION_MOVE:
+                if(swipedOut) {
+                    return true;
+                }
                 float offset = motionEvent.getRawX() - initialDragX;
                 float alpha = 1 - Math.abs(offset / viewWidth);
                 long duration = 0;
@@ -295,12 +299,12 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
                 if (Math.abs(offset) > dismissOffsetThreshold) {
                     offset = viewWidth * Math.signum(offset);
                     alpha = 0;
-                    duration = 100;
+                    duration = 200;
                     swipedOut = true;
-                    destroy();
                 }
 
                 view.animate()
+                        .setListener(swipedOut ? getDestroyListener() : null)
                         .x(offset)
                         .alpha(alpha)
                         .setDuration(duration)
@@ -311,6 +315,30 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
             default:
                 return false;
         }
+    }
+
+    private Animator.AnimatorListener getDestroyListener() {
+        return new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                destroy();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        };
     }
 
     public interface CookieBarDismissListener {
