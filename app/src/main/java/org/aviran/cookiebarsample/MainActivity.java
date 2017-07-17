@@ -40,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
                         .setIcon(R.mipmap.ic_launcher)
                         .setMessage(R.string.cookie_message)
                         .setBackgroundColor(R.color.colorPrimary)
-                        .setActionColor(R.color.colorAccent)
-                        .setTitleColor(R.color.colorAccent)
+                        .setActionColor(R.color.yellow)
+                        .setTitleColor(R.color.yellow)
                         .setLayoutGravity(Gravity.BOTTOM)
                         .setAction(R.string.cookie_action, new OnActionClickListener() {
                             @Override
                             public void onClick() {
-                                Toast.makeText(getApplicationContext(), "点击后，我更帅了!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Action Engaged!", Toast.LENGTH_LONG).show();
                             }
                         })
                         .show();
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction(R.string.cookie_action, new OnActionClickListener() {
                             @Override
                             public void onClick() {
-                                Toast.makeText(getApplicationContext(), "点击后，我更帅了!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Action Engaged!", Toast.LENGTH_LONG).show();
                             }
                         })
                         .show();
@@ -83,11 +83,11 @@ public class MainActivity extends AppCompatActivity {
                         .setDuration(5000)
                         .setBackgroundColor(R.color.colorPrimary)
                         .setActionColor(android.R.color.white)
-                        .setTitleColor(R.color.colorAccent)
+                        .setTitleColor(R.color.yellow)
                         .setAction(R.string.cookie_action, new OnActionClickListener() {
                             @Override
                             public void onClick() {
-                                Toast.makeText(getApplicationContext(), "点击后，我更帅了!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Action Engaged!", Toast.LENGTH_LONG).show();
                             }
                         })
                         .show();
