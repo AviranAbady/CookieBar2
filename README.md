@@ -7,7 +7,7 @@ Main differences are:
 * Only one Cookie can be displayed at a time (a new cookie will dismiss the current one if exists).
 
 ```gradle
-compile 'org.aviran.cookiebar2:cookiebar2:1.0.1'
+compile 'org.aviran.cookiebar2:cookiebar2:1.0.2'
 ```
 
 ## Screenshot

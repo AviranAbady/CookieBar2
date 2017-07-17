@@ -47,6 +47,9 @@ public class CookieBar {
     }
 
     private void addCookie(final ViewGroup parent, final Cookie cookie) {
+        if(cookie.getParent() != null) {
+            return;
+        }
 
         // if exists, remove existing cookie
         int childCount = parent .getChildCount();

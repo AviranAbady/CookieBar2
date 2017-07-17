@@ -166,7 +166,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         viewWidth = getWidth();
-        dismissOffsetThreshold = viewWidth / 2;
+        dismissOffsetThreshold = viewWidth / 3;
 
         if (layoutGravity == Gravity.TOP) {
             super.onLayout(changed, l, 0, r, layoutCookie.getMeasuredHeight());
@@ -231,7 +231,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
     public void dismiss(final CookieBarDismissListener listener) {
         if (swipedOut) {
-            destroy();
+            removeFromParent();
             return;
         }
 
@@ -245,7 +245,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
                 if (listener != null) {
                     listener.onDismiss();
                 }
-                destroy();
+                removeFromParent();
             }
 
             @Override
@@ -258,7 +258,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         startAnimation(slideOutAnimation);
     }
 
-    private void destroy() {
+    private void removeFromParent() {
         postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -289,7 +289,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
                 return true;
 
             case MotionEvent.ACTION_MOVE:
-                if(swipedOut) {
+                if (swipedOut) {
                     return true;
                 }
                 float offset = motionEvent.getRawX() - initialDragX;
@@ -326,7 +326,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                destroy();
+                removeFromParent();
             }
 
             @Override
