@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         btnTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CookieBar.Builder(MainActivity.this)
+                CookieBar.Build(MainActivity.this)
                         .setTitle(R.string.cookie_title)
                         .setMessage(R.string.cookie_message)
                         .setDuration(5000)
@@ -33,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
         btnBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CookieBar
-                        .Builder(MainActivity.this)
+                CookieBar.Build(MainActivity.this)
                         .setDuration(5000)
                         .setTitle(R.string.cookie_title)
                         .setIcon(R.mipmap.ic_launcher)
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         btnTopWithIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CookieBar.Builder(MainActivity.this)
+                CookieBar.Build(MainActivity.this)
                         .setTitle(R.string.cookie_title)
                         .setIcon(R.mipmap.ic_launcher)
                         .setBackgroundColor(R.color.colorAccent)

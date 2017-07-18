@@ -3,39 +3,43 @@ CookieBar 2
 CookieBar is a lightweight library for showing a brief message at the top or bottom of the screen.<br/><br/>
 This is a fork of <a href="https://github.com/liuguangqiang/CookieBar/">Cookiebar</a><br/><br/>
 Main differences are:
-* Swipe to dismiss was added
-* Only one Cookie can be displayed at a time (a new cookie will dismiss the current one if exists).
+
+* Swipe to dismiss has been added.
+* Only one Cookie can be displayed at a time (New top cookie will dismiss the current top one if exists).
+* Slightly different build interface.
+* Colors presets added.
+* Removed supportRtl from library scope (Can be set at app level when necessary).
 
 ```gradle
-compile 'org.aviran.cookiebar2:cookiebar2:1.0.3'
+compile 'org.aviran.cookiebar2:cookiebar2:1.0.4'
 ```
 
 ## Screenshot
 <img src="https://raw.githubusercontent.com/AviranAbady/storage/master/cookiebar2.gif">
 
-## A simple CookieBar.
+## Create a simple cookie
 ```java
- new CookieBar.Builder(MainActivity.this)
-                        .setTitle("TITLE")
-                        .setMessage("MESSAGE")
-                        .show();
+CookieBar.Build(MainActivity.this)
+         .setTitle("TITLE")
+         .setMessage("MESSAGE")
+         .show();
 ```
 
-## A CookieBar with a icon and a action button.
+## Cookie with an icon and an action
 ```java
- new CookieBar.Builder(MainActivity.this)
-                        .setTitle("TITLE")
-                        .setIcon(R.mipmap.ic_launcher)
-                        .setMessage("MESSAGE")
-                        .setAction("ACTION", new OnActionClickListener() {
-                            @Override
-                            public void onClick() {
-                            }
-                        })
-                        .show();
+CookieBar.Build(MainActivity.this)
+         .setTitle("TITLE")
+         .setIcon(R.drawable.icon)
+         .setMessage("MESSAGE")
+         .setAction("ACTION", new OnActionClickListener() {
+             @Override
+             public void onClick() {
+             }
+         })
+         .show();
 ```
 
-## You can change the default style by set the Theme's attributes.
+## Change default cookie style by setting theme attributes
 
 ```xml
 <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -46,7 +50,7 @@ compile 'org.aviran.cookiebar2:cookiebar2:1.0.3'
 </style>
 ```
 
-## Or dynamically change the style with a cookie builder.
+## Dynamically set cookie style
  * layoutGravity
  * backgroundColor
  * titleColor

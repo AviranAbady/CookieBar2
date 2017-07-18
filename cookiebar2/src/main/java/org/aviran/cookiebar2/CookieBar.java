@@ -22,6 +22,10 @@ import android.view.ViewGroup;
  * <p> Created by Eric on 2017/3/2.
  */
 public class CookieBar {
+
+    public static Builder Build(Activity activity) {
+        return new CookieBar.Builder(activity);
+    }
     private Cookie cookieView;
     private Activity context;
 
