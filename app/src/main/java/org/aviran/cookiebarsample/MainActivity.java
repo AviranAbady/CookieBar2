@@ -59,10 +59,11 @@ public class MainActivity extends AppCompatActivity {
                 CookieBar.Build(MainActivity.this)
                         .setTitle(R.string.cookie_title)
                         .setIcon(R.mipmap.ic_launcher)
+                        .setIconAnimation(R.animator.iconspin)
                         .setBackgroundColor(R.color.colorAccent)
                         .setMessage(R.string.cookie_message)
                         .setDuration(5000)
-                        .setAction(R.string.cookie_action, new OnActionClickListener() {
+                        .setAction("Do some action asap", new OnActionClickListener() {
                             @Override
                             public void onClick() {
                                 Toast.makeText(getApplicationContext(), "Action Engaged!", Toast.LENGTH_LONG).show();

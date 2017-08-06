@@ -69,6 +69,8 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         btnAction = (TextView) findViewById(R.id.btn_action);
         initDefaultStyle(context);
 
+
+
         layoutCookie.setOnTouchListener(this);
     }
 
@@ -109,6 +111,11 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
             if (params.iconResId != 0) {
                 ivIcon.setVisibility(VISIBLE);
                 ivIcon.setBackgroundResource(params.iconResId);
+                if(params.iconAnimator != null) {
+                    params.iconAnimator.setTarget(ivIcon);
+                    params.iconAnimator.start();
+
+                }
             }
 
             //Title

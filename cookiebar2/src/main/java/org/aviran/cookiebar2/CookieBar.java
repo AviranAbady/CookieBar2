@@ -1,6 +1,9 @@
 package org.aviran.cookiebar2;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.app.Activity;
+import android.support.annotation.AnimatorRes;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
@@ -22,15 +25,11 @@ import android.view.ViewGroup;
  * <p> Created by Eric on 2017/3/2.
  */
 public class CookieBar {
-
     public static Builder Build(Activity activity) {
         return new CookieBar.Builder(activity);
     }
     private Cookie cookieView;
     private Activity context;
-
-    private CookieBar() {
-    }
 
     private CookieBar(Activity context, Params params) {
         this.context = context;
@@ -142,6 +141,11 @@ public class CookieBar {
             return this;
         }
 
+        public Builder setIconAnimation(@AnimatorRes int iconAnimation) {
+            params.iconAnimator = (AnimatorSet) AnimatorInflater.loadAnimator(context, iconAnimation);
+            return this;
+        }
+
         public Builder setAction(@StringRes int resId, OnActionClickListener onActionClickListener) {
             params.action = context.getString(resId);
             params.onActionClickListener = onActionClickListener;
@@ -177,5 +181,6 @@ public class CookieBar {
         public int actionColor;
         public long duration = 2000;
         public int layoutGravity = Gravity.TOP;
+        public AnimatorSet iconAnimator;
     }
 }

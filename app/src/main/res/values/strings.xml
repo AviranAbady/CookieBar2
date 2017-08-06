@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">CookieBar2 Demo</string>
     <string name="cookie_title">CookieBar title</string>
-    <string name="cookie_message">CookieBar Message</string>
+    <string name="cookie_message">Hey! I\'m cookie, delivering fancy interactive messages on Android since 2017.</string>
     <string name="cookie_action">Action</string>
 </resources>
