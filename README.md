@@ -7,11 +7,12 @@ Main differences are:
 * Swipe to dismiss has been added.
 * Only one Cookie can be displayed at a time (New top cookie will dismiss the current top one if exists).
 * Slightly different build interface.
+* Icon animator support.
 * Colors presets added.
-* Removed supportRtl from library scope (Can be set at app level when necessary).
+* Removed supportRtl from library scope (Should be set at app level).
 
 ```gradle
-compile 'org.aviran.cookiebar2:cookiebar2:1.0.4'
+compile 'org.aviran.cookiebar2:cookiebar2:1.0.5'
 ```
 
 ## Screenshot
