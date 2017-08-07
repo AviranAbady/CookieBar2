@@ -6,7 +6,6 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import org.aviran.cookiebar2.CookieBar;
 import org.aviran.cookiebar2.OnActionClickListener;
 
@@ -22,8 +21,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 CookieBar.Build(MainActivity.this)
-                        .setTitle(R.string.cookie_title)
-                        .setMessage(R.string.cookie_message)
+                        .setTitle(R.string.top_cookie_title)
+                        .setTitleColor(R.color.yellow)
+                        .setMessage(R.string.top_cookie_message)
+                        .setIcon(R.drawable.ic_android_white_48dp)
                         .setDuration(5000)
                         .show();
             }
@@ -35,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 CookieBar.Build(MainActivity.this)
                         .setDuration(5000)
-                        .setTitle(R.string.cookie_title)
+                        .setTitle(R.string.bottom_cookie_title)
                         .setIcon(R.mipmap.ic_launcher)
-                        .setMessage(R.string.cookie_message)
+                        .setMessage(R.string.bottom_cookie_message)
                         .setBackgroundColor(R.color.colorPrimary)
                         .setActionColor(R.color.yellow)
                         .setTitleColor(R.color.yellow)
@@ -52,18 +53,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnTopWithIcon = (Button) findViewById(R.id.btn_top_with_icon);
-        btnTopWithIcon.setOnClickListener(new View.OnClickListener() {
+        Button btnBottomAnimated = (Button) findViewById(R.id.btn_bottom_animated);
+        btnBottomAnimated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CookieBar.Build(MainActivity.this)
-                        .setTitle(R.string.cookie_title)
-                        .setIcon(R.mipmap.ic_launcher)
+                        .setTitle(R.string.fancy_cookie_title)
+                        .setMessage(R.string.fancy_cookie_message)
+                        .setIcon(R.drawable.ic_settings_white_48dp)
                         .setIconAnimation(R.animator.iconspin)
-                        .setBackgroundColor(R.color.colorAccent)
-                        .setMessage(R.string.cookie_message)
+                        .setTitleColor(R.color.fancyTitle)
+                        .setActionColor(R.color.fancyAction)
+                        .setMessageColor(R.color.fancyMessage)
+                        .setBackgroundColor(R.color.fancyBackground)
                         .setDuration(5000)
-                        .setAction("Do some action asap", new OnActionClickListener() {
+                        .setLayoutGravity(Gravity.BOTTOM)
+                        .setAction("OPEN SETTINGS", new OnActionClickListener() {
                             @Override
                             public void onClick() {
                                 Toast.makeText(getApplicationContext(), "Action Engaged!", Toast.LENGTH_LONG).show();
@@ -73,23 +78,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnCustom = (Button) findViewById(R.id.btn_custom);
-        btnCustom.setOnClickListener(new View.OnClickListener() {
+        Button btnExtraLarge = (Button) findViewById(R.id.btn_extra_large);
+        btnExtraLarge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new CookieBar.Builder(MainActivity.this)
-                        .setTitle(R.string.cookie_title)
-                        .setMessage(R.string.cookie_message)
+                        .setTitle(R.string.large_cookie_title)
+                        .setMessage(R.string.large_cookie_message)
                         .setDuration(5000)
-                        .setBackgroundColor(R.color.colorPrimary)
-                        .setActionColor(android.R.color.white)
-                        .setTitleColor(R.color.yellow)
-                        .setAction(R.string.cookie_action, new OnActionClickListener() {
-                            @Override
-                            public void onClick() {
-                                Toast.makeText(getApplicationContext(), "Action Engaged!", Toast.LENGTH_LONG).show();
-                            }
-                        })
+                        .show();
+            }
+        });
+
+        Button btnPlain = (Button) findViewById(R.id.btn_plain);
+        btnPlain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new CookieBar.Builder(MainActivity.this)
+                        .setTitle(R.string.plain_cookie_title)
+                        .setMessage(R.string.plain_cookie_message)
+                        .setDuration(5000)
                         .show();
             }
         });

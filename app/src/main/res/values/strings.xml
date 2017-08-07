@@ -3,4 +3,20 @@
     <string name="cookie_title">CookieBar title</string>
     <string name="cookie_message">Hey! I\'m cookie, delivering fancy interactive messages on Android since 2017.</string>
     <string name="cookie_action">Action</string>
+    <string name="top_cookie_title">Top cookie with an icon</string>
+    <string name="top_cookie_message">This is a top cookie with an icon.</string>
+    <string name="bottom_cookie_title">Bottom cookie with and icon</string>
+    <string name="bottom_cookie_message">This is a bottom cookie with an icon and an action. Nice right?</string>
+    <string name="fancy_cookie_title">Icons can be animated</string>
+    <string name="fancy_cookie_message">Fancy animations will make your cookies super exciting.</string>
+    <string name="plain_cookie_title">Title</string>
+    <string name="plain_cookie_message">This is the default plain cookie</string>
+    <string name="large_cookie_title">This is an extra large cookie</string>
+    <string name="large_cookie_message">Cookies can be extra large!\n\n
+#1: Chocolate Chip Cookies.\n
+#2: Chocolate Cookies.\n
+#3: Oatmeal Chocolate Chip Cookies.\n
+#4: Peanut Butter Cookies.\n
+#5: Abady Cookies.</string>
 </resources>
+

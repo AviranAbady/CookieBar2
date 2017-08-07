@@ -4,4 +4,10 @@
     <color name="colorPrimaryDark">#1565c0</color>
     <color name="yellow">#ffff00</color>
     <color name="colorAccent">#FF4081</color>
+
+
+    <color name="fancyTitle">#ffff00</color>
+    <color name="fancyMessage">#ffffff</color>
+    <color name="fancyBackground">#4CAF50</color>
+    <color name="fancyAction">#ffff00</color>
 </resources>
