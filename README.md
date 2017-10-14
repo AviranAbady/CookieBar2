@@ -1,4 +1,4 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CookieBar2-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6122)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CookieBar2-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6122) &nbsp;&nbsp;&nbsp; If you find CookieBar2 useful, give it a 🌟 
 
 CookieBar 2
 ===============
