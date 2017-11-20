@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.support.annotation.AnimatorRes;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.view.Gravity;
 import android.view.View;
@@ -13,16 +14,15 @@ import android.view.ViewGroup;
 
 /**
  * CookieBar is a lightweight library for showing a brief message at the top or bottom of the
- * screen. <p>
- * <pre>
- * new CookieBar
- *      .Builder(MainActivity.this)
+ * screen.
+ *
+ * CookieBar
+ *      .Build(MainActivity.this)
  *      .setTitle("TITLE")
  *      .setMessage("MESSAGE")
  *      .setAction("ACTION", new OnActionClickListener() {})
  *      .show();
- * </pre>
- * <p> Created by Eric on 2017/3/2.
+ *
  */
 public class CookieBar {
     public static Builder Build(Activity activity) {
@@ -157,6 +157,11 @@ public class CookieBar {
             return this;
         }
 
+        public Builder setCustomView(View customView) {
+            params.customView = customView;
+            return this;
+        }
+
         public CookieBar create() {
             CookieBar cookie = new CookieBar(context, params);
             return cookie;
@@ -167,6 +172,8 @@ public class CookieBar {
             cookie.show();
             return cookie;
         }
+
+
     }
 
     final static class Params {
@@ -182,5 +189,6 @@ public class CookieBar {
         public long duration = 2000;
         public int layoutGravity = Gravity.TOP;
         public AnimatorSet iconAnimator;
+        public View customView;
     }
 }

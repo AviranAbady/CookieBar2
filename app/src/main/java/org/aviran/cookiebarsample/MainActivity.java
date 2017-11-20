@@ -3,8 +3,10 @@ package org.aviran.cookiebarsample;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import org.aviran.cookiebar2.CookieBar;
 import org.aviran.cookiebar2.OnActionClickListener;
@@ -16,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btnTop = (Button) findViewById(R.id.btn_top);
+        Button btnTop = findViewById(R.id.btn_top);
         btnTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnBottom = (Button) findViewById(R.id.btn_bottom);
+        Button btnBottom = findViewById(R.id.btn_bottom);
         btnBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnBottomAnimated = (Button) findViewById(R.id.btn_bottom_animated);
+        Button btnBottomAnimated = findViewById(R.id.btn_bottom_animated);
         btnBottomAnimated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,11 +80,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnExtraLarge = (Button) findViewById(R.id.btn_extra_large);
+        Button btnExtraLarge = findViewById(R.id.btn_extra_large);
         btnExtraLarge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CookieBar.Builder(MainActivity.this)
+                CookieBar.Build(MainActivity.this)
                         .setTitle(R.string.large_cookie_title)
                         .setMessage(R.string.large_cookie_message)
                         .setDuration(5000)
@@ -90,14 +92,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnPlain = (Button) findViewById(R.id.btn_plain);
+        Button btnPlain = findViewById(R.id.btn_plain);
         btnPlain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new CookieBar.Builder(MainActivity.this)
+                CookieBar.Build(MainActivity.this)
                         .setTitle(R.string.plain_cookie_title)
                         .setMessage(R.string.plain_cookie_message)
                         .setDuration(5000)
+                        .show();
+            }
+        });
+
+        Button btnCustomView = findViewById(R.id.btn_custom_view);
+        btnCustomView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                final View customView =
+                        LayoutInflater.
+                        from(MainActivity.this).
+                        inflate(R.layout.custom_cookie, null);
+
+                final ProgressBar progressBar = customView.findViewById(R.id.cookiebar_progressbar);
+
+                CookieBar.Build(MainActivity.this)
+                        .setCustomView(customView)
+                        .setTitle(R.string.plain_cookie_title)
+                        .setMessage(R.string.plain_cookie_message)
+                        .setDuration(10000)
+                        .setAction("Hide Progress bar", new OnActionClickListener() {
+                            @Override
+                            public void onClick() {
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        })
                         .show();
             }
         });

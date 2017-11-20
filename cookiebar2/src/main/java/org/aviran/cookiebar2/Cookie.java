@@ -19,16 +19,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/**
- * Created by Eric on 2017/3/2.
- */
 final class Cookie extends LinearLayout implements View.OnTouchListener {
 
     private long slideOutAnimationDuration = 500;
     private Animation slideInAnimation;
     private Animation slideOutAnimation;
 
-    private LinearLayout layoutCookie;
+    private ViewGroup layoutCookie;
     private TextView tvTitle;
     private TextView tvMessage;
     private ImageView ivIcon;
@@ -52,24 +49,29 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     public Cookie(@NonNull final Context context, @Nullable final AttributeSet attrs,
                   final int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initViews(context);
     }
 
     public int getLayoutGravity() {
         return layoutGravity;
     }
 
-    private void initViews(Context context) {
-        inflate(getContext(), R.layout.layout_cookie, this);
+    private void initViews(View rootView) {
 
-        layoutCookie = (LinearLayout) findViewById(R.id.cookie);
-        tvTitle = (TextView) findViewById(R.id.tv_title);
-        tvMessage = (TextView) findViewById(R.id.tv_message);
-        ivIcon = (ImageView) findViewById(R.id.iv_icon);
-        btnAction = (TextView) findViewById(R.id.btn_action);
-        initDefaultStyle(context);
+        if(rootView != null) {
+            addView(rootView, new ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
+        }
+        else {
+            inflate(getContext(), R.layout.layout_cookie, this);
+        }
 
-
+        layoutCookie = findViewById(R.id.cookie);
+        tvTitle = findViewById(R.id.tv_title);
+        tvMessage = findViewById(R.id.tv_message);
+        ivIcon = findViewById(R.id.iv_icon);
+        btnAction = findViewById(R.id.btn_action);
+        initDefaultStyle(getContext());
 
         layoutCookie.setOnTouchListener(this);
     }
@@ -103,6 +105,8 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     }
 
     public void setParams(final CookieBar.Params params) {
+        initViews(params.customView);
+
         if (params != null) {
             duration = params.duration;
             layoutGravity = params.layoutGravity;
