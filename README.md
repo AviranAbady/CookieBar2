@@ -3,18 +3,19 @@
 CookieBar 2
 ===============
 CookieBar is a lightweight library for showing a brief message at the top or bottom of the screen.<br/><br/>
-This is a fork of <a href="https://github.com/liuguangqiang/CookieBar/">Cookiebar</a><br/><br/>
-Main differences are:
+
+Main differences from the original <a href="https://github.com/liuguangqiang/CookieBar/">Cookiebar</a> are:
 
 * Swipe to dismiss has been added.
 * Only one Cookie can be displayed at a time (New top cookie will dismiss the current top one if exists).
 * Slightly different build interface.
 * Icon animator support.
+* Custom layout can be applied to a cookie.
 * Colors presets added.
 * Removed supportRtl from library scope (Should be set at app level).
 
 ```gradle
-compile 'org.aviran.cookiebar2:cookiebar2:1.0.5'
+compile 'org.aviran.cookiebar2:cookiebar2:1.0.6'
 ```
 
 ## Screenshot
