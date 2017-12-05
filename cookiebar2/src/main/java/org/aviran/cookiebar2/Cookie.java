@@ -71,9 +71,18 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         tvMessage = findViewById(R.id.tv_message);
         ivIcon = findViewById(R.id.iv_icon);
         btnAction = findViewById(R.id.btn_action);
-        initDefaultStyle(getContext());
 
+        validateLayoutIntegrity();
+        initDefaultStyle(getContext());
         layoutCookie.setOnTouchListener(this);
+    }
+
+    private void validateLayoutIntegrity() {
+        if(layoutCookie == null || tvTitle == null || tvMessage == null ||
+                ivIcon == null || btnAction == null) {
+
+            throw new RuntimeException("Your custom cookie view is missing one of the default required views");
+        }
     }
 
 
@@ -236,7 +245,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         });
     }
 
-    private void dismiss() {
+    public void dismiss() {
         dismiss(null);
     }
 

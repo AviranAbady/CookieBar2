@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import org.aviran.cookiebar2.CookieBar;
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 CookieBar.Build(MainActivity.this)
                         .setCustomView(customView)
                         .setTitle(R.string.plain_cookie_title)
-                        .setMessage(R.string.plain_cookie_message)
+                        .setMessage(R.string.custom_view_cookie_message)
                         .setDuration(10000)
                         .setAction("Hide Progress bar", new OnActionClickListener() {
                             @Override
@@ -130,5 +131,15 @@ public class MainActivity extends AppCompatActivity {
                         .show();
             }
         });
+
+        ImageView cookieMonster = findViewById(R.id.cookie_monster);
+
+        cookieMonster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CookieBar.dismiss(MainActivity.this);
+            }
+        });
+
     }
 }

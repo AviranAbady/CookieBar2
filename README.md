@@ -7,6 +7,7 @@ CookieBar is a lightweight library for showing a brief message at the top or bot
 Main differences from the original <a href="https://github.com/liuguangqiang/CookieBar/">Cookiebar</a> are:
 
 * Swipe to dismiss has been added.
+* Programmatic dismiss functionality added.
 * Only one Cookie can be displayed at a time (New top cookie will dismiss the current top one if exists).
 * Slightly different build interface.
 * Icon animator support.
@@ -15,7 +16,7 @@ Main differences from the original <a href="https://github.com/liuguangqiang/Coo
 * Removed supportRtl from library scope (Should be set at app level).
 
 ```gradle
-compile 'org.aviran.cookiebar2:cookiebar2:1.0.6'
+compile 'org.aviran.cookiebar2:cookiebar2:1.0.7'
 ```
 
 ## Screenshot
@@ -39,6 +40,38 @@ CookieBar.Build(MainActivity.this)
              @Override
              public void onClick() {
              }
+         })
+         .show();
+```
+
+## Programmatically dismiss cookies currently being displayed
+```java
+CookieBar.dismiss(MainActivity.this);
+
+```
+
+
+## Create a cookie with a custom layout
+```java
+// The view you inflate must contain subviews with the same id's as the original layout_cookie.xml
+// You can set visibility to gone, if you wish to hide them.
+final View customView =
+                        LayoutInflater.
+                        from(getContext()).
+                        inflate(R.layout.custom_cookie, null);
+
+final ProgressBar progressBar = customView.findViewById(R.id.cookiebar_progressbar);
+
+CookieBar.Build(MainActivity.this)
+         .setCustomView(customView)
+         .setTitle(R.string.plain_cookie_title)
+         .setMessage(R.string.plain_cookie_message)
+         .setDuration(10000)
+         .setAction("Hide Progress bar", new OnActionClickListener() {
+                  @Override
+                  public void onClick() {
+                           progressBar.setVisibility(View.GONE);
+                  }
          })
          .show();
 ```
