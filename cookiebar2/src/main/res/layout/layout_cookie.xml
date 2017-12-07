@@ -34,7 +34,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="Title"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -45,7 +44,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="message..."
                 android:textColor="@android:color/white"
                 android:textSize="14sp"
                 android:visibility="gone" />
@@ -55,7 +53,7 @@
     </LinearLayout>
 
     <TextView
-        android:foreground="?selectableItemBackground"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_marginTop="6dp"
         android:id="@+id/btn_action"
         android:layout_width="wrap_content"

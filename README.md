@@ -16,7 +16,7 @@ Main differences from the original <a href="https://github.com/liuguangqiang/Coo
 * Removed supportRtl from library scope (Should be set at app level).
 
 ```gradle
-compile 'org.aviran.cookiebar2:cookiebar2:1.0.7'
+compile 'org.aviran.cookiebar2:cookiebar2:1.0.8'
 ```
 
 ## Screenshot
