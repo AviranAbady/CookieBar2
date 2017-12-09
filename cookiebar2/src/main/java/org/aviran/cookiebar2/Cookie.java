@@ -22,7 +22,6 @@ import android.widget.TextView;
 final class Cookie extends LinearLayout implements View.OnTouchListener {
 
     private long slideOutAnimationDuration = 500;
-    private Animation slideInAnimation;
     private Animation slideOutAnimation;
 
     private ViewGroup layoutCookie;
@@ -57,12 +56,11 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
     private void initViews(View rootView) {
 
-        if(rootView != null) {
+        if (rootView != null) {
             addView(rootView, new ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT));
-        }
-        else {
+        } else {
             inflate(getContext(), R.layout.layout_cookie, this);
         }
 
@@ -78,7 +76,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     }
 
     private void validateLayoutIntegrity() {
-        if(layoutCookie == null || tvTitle == null || tvMessage == null ||
+        if (layoutCookie == null || tvTitle == null || tvMessage == null ||
                 ivIcon == null || btnAction == null) {
 
             throw new RuntimeException("Your custom cookie view is missing one of the default required views");
@@ -116,71 +114,69 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     public void setParams(final CookieBar.Params params) {
         initViews(params.customView);
 
-        if (params != null) {
-            duration = params.duration;
-            layoutGravity = params.layoutGravity;
+        duration = params.duration;
+        layoutGravity = params.layoutGravity;
 
-            //Icon
-            if (params.iconResId != 0) {
-                ivIcon.setVisibility(VISIBLE);
-                ivIcon.setBackgroundResource(params.iconResId);
-                if(params.iconAnimator != null) {
-                    params.iconAnimator.setTarget(ivIcon);
-                    params.iconAnimator.start();
+        //Icon
+        if (params.iconResId != 0) {
+            ivIcon.setVisibility(VISIBLE);
+            ivIcon.setBackgroundResource(params.iconResId);
+            if (params.iconAnimator != null) {
+                params.iconAnimator.setTarget(ivIcon);
+                params.iconAnimator.start();
 
-                }
             }
-
-            //Title
-            if (!TextUtils.isEmpty(params.title)) {
-                tvTitle.setVisibility(VISIBLE);
-                tvTitle.setText(params.title);
-                if (params.titleColor != 0) {
-                    tvTitle.setTextColor(ContextCompat.getColor(getContext(), params.titleColor));
-                }
-            }
-
-            //Message
-            if (!TextUtils.isEmpty(params.message)) {
-                tvMessage.setVisibility(VISIBLE);
-                tvMessage.setText(params.message);
-                if (params.messageColor != 0) {
-                    tvMessage.setTextColor(ContextCompat.getColor(getContext(), params.messageColor));
-                }
-            }
-
-            //Action
-            if (!TextUtils.isEmpty(params.action) && params.onActionClickListener != null) {
-                btnAction.setVisibility(VISIBLE);
-                btnAction.setText(params.action);
-                btnAction.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        params.onActionClickListener.onClick();
-                        dismiss();
-                    }
-                });
-
-                //Action Color
-                if (params.actionColor != 0) {
-                    btnAction.setTextColor(ContextCompat.getColor(getContext(), params.actionColor));
-                }
-            }
-
-            //Background
-            if (params.backgroundColor != 0) {
-                layoutCookie
-                        .setBackgroundColor(ContextCompat.getColor(getContext(), params.backgroundColor));
-            }
-
-            int padding = getContext().getResources().getDimensionPixelSize(R.dimen.default_padding);
-            if (layoutGravity == Gravity.BOTTOM) {
-                layoutCookie.setPadding(padding, padding, padding, padding);
-            }
-
-            createInAnim();
-            createOutAnim();
         }
+
+        //Title
+        if (!TextUtils.isEmpty(params.title)) {
+            tvTitle.setVisibility(VISIBLE);
+            tvTitle.setText(params.title);
+            if (params.titleColor != 0) {
+                tvTitle.setTextColor(ContextCompat.getColor(getContext(), params.titleColor));
+            }
+        }
+
+        //Message
+        if (!TextUtils.isEmpty(params.message)) {
+            tvMessage.setVisibility(VISIBLE);
+            tvMessage.setText(params.message);
+            if (params.messageColor != 0) {
+                tvMessage.setTextColor(ContextCompat.getColor(getContext(), params.messageColor));
+            }
+        }
+
+        //Action
+        if (!TextUtils.isEmpty(params.action) && params.onActionClickListener != null) {
+            btnAction.setVisibility(VISIBLE);
+            btnAction.setText(params.action);
+            btnAction.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    params.onActionClickListener.onClick();
+                    dismiss();
+                }
+            });
+
+            //Action Color
+            if (params.actionColor != 0) {
+                btnAction.setTextColor(ContextCompat.getColor(getContext(), params.actionColor));
+            }
+        }
+
+        //Background
+        if (params.backgroundColor != 0) {
+            layoutCookie
+                    .setBackgroundColor(ContextCompat.getColor(getContext(), params.backgroundColor));
+        }
+
+        int padding = getContext().getResources().getDimensionPixelSize(R.dimen.default_padding);
+        if (layoutGravity == Gravity.BOTTOM) {
+            layoutCookie.setPadding(padding, padding, padding, padding);
+        }
+
+        createInAnim();
+        createOutAnim();
     }
 
     @Override
@@ -196,7 +192,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     }
 
     private void createInAnim() {
-        slideInAnimation = AnimationUtils.loadAnimation(getContext(),
+        Animation slideInAnimation = AnimationUtils.loadAnimation(getContext(),
                 layoutGravity == Gravity.BOTTOM ? R.anim.slide_in_from_bottom : R.anim.slide_in_from_top);
         slideInAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override

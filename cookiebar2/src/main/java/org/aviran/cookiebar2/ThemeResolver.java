@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.AttrRes;
 
-/**
- * Created by Eric on 2017/3/21.
- */
 class ThemeResolver {
 
     public static int getColor(Context context, @AttrRes int attr) {

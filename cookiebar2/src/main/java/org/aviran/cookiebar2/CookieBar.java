@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.support.annotation.AnimatorRes;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.view.Gravity;
 import android.view.View;
@@ -17,7 +16,7 @@ import android.view.ViewGroup;
  * screen.
  *
  * CookieBar
- *      .Build(MainActivity.this)
+ *      .build(MainActivity.this)
  *      .setTitle("TITLE")
  *      .setMessage("MESSAGE")
  *      .setAction("ACTION", new OnActionClickListener() {})
@@ -25,23 +24,23 @@ import android.view.ViewGroup;
  *
  */
 public class CookieBar {
-    public static Builder Build(Activity activity) {
+    private Cookie cookieView;
+    private final Activity context;
+
+    public static Builder build(Activity activity) {
         return new CookieBar.Builder(activity);
     }
 
     public static void dismiss(Activity activity) {
-        new CookieBar(activity, null).dismiss();
+        new CookieBar(activity, null);
     }
-
-    private Cookie cookieView;
-    private Activity context;
 
     private CookieBar(Activity context, Params params) {
         this.context = context;
-
         if(params == null) {
             // since params is null, this CookieBar object can only be used to dismiss
             // existing cookies
+            dismiss();
             return;
         }
 
@@ -49,7 +48,7 @@ public class CookieBar {
         cookieView.setParams(params);
     }
 
-    public void show() {
+    private void show() {
         if (cookieView != null) {
             final ViewGroup decorView = (ViewGroup) context.getWindow().getDecorView();
             final ViewGroup content = decorView.findViewById(android.R.id.content);
@@ -61,7 +60,7 @@ public class CookieBar {
         }
     }
 
-    public void dismiss() {
+    private void dismiss() {
         final ViewGroup decorView = (ViewGroup) context.getWindow().getDecorView();
         final ViewGroup content = decorView.findViewById(android.R.id.content);
 
@@ -106,9 +105,9 @@ public class CookieBar {
 
     public static class Builder {
 
-        private Params params = new Params();
+        private final Params params = new Params();
 
-        public Activity context;
+        public final Activity context;
 
         /**
          * Create a builder for an cookie.
@@ -195,8 +194,7 @@ public class CookieBar {
         }
 
         public CookieBar create() {
-            CookieBar cookie = new CookieBar(context, params);
-            return cookie;
+            return new CookieBar(context, params);
         }
 
         public CookieBar show() {

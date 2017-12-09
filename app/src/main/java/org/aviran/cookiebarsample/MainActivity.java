@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         btnTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CookieBar.Build(MainActivity.this)
+                CookieBar.build(MainActivity.this)
                         .setTitle(R.string.top_cookie_title)
                         .setTitleColor(R.color.yellow)
                         .setMessage(R.string.top_cookie_message)
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         btnBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CookieBar.Build(MainActivity.this)
+                CookieBar.build(MainActivity.this)
                         .setDuration(5000)
                         .setTitle(R.string.bottom_cookie_title)
                         .setIcon(R.mipmap.ic_launcher)
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         btnBottomAnimated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CookieBar.Build(MainActivity.this)
+                CookieBar.build(MainActivity.this)
                         .setTitle(R.string.fancy_cookie_title)
                         .setMessage(R.string.fancy_cookie_message)
                         .setIcon(R.drawable.ic_settings_white_48dp)
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         btnExtraLarge.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CookieBar.Build(MainActivity.this)
+                CookieBar.build(MainActivity.this)
                         .setTitle(R.string.large_cookie_title)
                         .setMessage(R.string.large_cookie_message)
                         .setDuration(5000)
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         btnPlain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CookieBar.Build(MainActivity.this)
+                CookieBar.build(MainActivity.this)
                         .setTitle(R.string.plain_cookie_title)
                         .setMessage(R.string.plain_cookie_message)
                         .setDuration(5000)
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
                 final ProgressBar progressBar = customView.findViewById(R.id.cookiebar_progressbar);
 
-                CookieBar.Build(MainActivity.this)
+                CookieBar.build(MainActivity.this)
                         .setCustomView(customView)
                         .setTitle(R.string.plain_cookie_title)
                         .setMessage(R.string.custom_view_cookie_message)

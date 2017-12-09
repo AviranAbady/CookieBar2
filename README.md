@@ -1,4 +1,4 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CookieBar2-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6122) &nbsp;&nbsp;&nbsp; If you find CookieBar2 useful, give it a 🌟 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CookieBar2-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6122)
 
 CookieBar 2
 ===============
@@ -9,14 +9,15 @@ Main differences from the original <a href="https://github.com/liuguangqiang/Coo
 * Swipe to dismiss has been added.
 * Programmatic dismiss functionality added.
 * Only one Cookie can be displayed at a time (New top cookie will dismiss the current top one if exists).
+* Message view captures clicks, blocks downward propagation.
 * Slightly different build interface.
 * Icon animator support.
 * Custom layout can be applied to a cookie.
 * Colors presets added.
-* Removed supportRtl from library scope (Should be set at app level).
+* Removed supportRtl / allowBackup from library scope (Should be set at app level).
 
 ```gradle
-compile 'org.aviran.cookiebar2:cookiebar2:1.0.8'
+compile 'org.aviran.cookiebar2:cookiebar2:1.0.9'
 ```
 
 ## Screenshot
@@ -24,7 +25,7 @@ compile 'org.aviran.cookiebar2:cookiebar2:1.0.8'
 
 ## Create a simple cookie
 ```java
-CookieBar.Build(MainActivity.this)
+CookieBar.build(MainActivity.this)
          .setTitle("TITLE")
          .setMessage("MESSAGE")
          .show();
@@ -32,7 +33,7 @@ CookieBar.Build(MainActivity.this)
 
 ## Cookie with an icon and an action
 ```java
-CookieBar.Build(MainActivity.this)
+CookieBar.build(MainActivity.this)
          .setTitle("TITLE")
          .setIcon(R.drawable.icon)
          .setMessage("MESSAGE")
@@ -62,7 +63,7 @@ final View customView =
 
 final ProgressBar progressBar = customView.findViewById(R.id.cookiebar_progressbar);
 
-CookieBar.Build(MainActivity.this)
+CookieBar.build(MainActivity.this)
          .setCustomView(customView)
          .setTitle(R.string.plain_cookie_title)
          .setMessage(R.string.plain_cookie_message)

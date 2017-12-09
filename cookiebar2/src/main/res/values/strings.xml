@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CookieBar2</string>
+    <string name="action">ACTION</string>
 </resources>

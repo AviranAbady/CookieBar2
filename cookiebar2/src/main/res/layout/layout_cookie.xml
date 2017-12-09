@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:text="ACTION"
+        android:text="@string/action"
         android:textColor="@color/default_action_color"
         android:textSize="14sp"
         android:textStyle="bold"
