@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6474fc01133444e0b6f615d9b1af8589)](https://www.codacy.com/app/AviranAbady/CookieBar2?utm_source=github.com&utm_medium=referral&utm_content=AviranAbady/CookieBar2&utm_campaign=badger)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CookieBar2-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6122)
 
 CookieBar 2
