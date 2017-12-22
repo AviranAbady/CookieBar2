@@ -197,7 +197,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         slideInAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-
+                // no implementation
             }
 
             @Override
@@ -212,7 +212,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-
+                // no implementation
             }
         });
 
@@ -226,17 +226,17 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         slideOutAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-
+                // no implementation
             }
 
             @Override
             public void onAnimationEnd(Animation animation) {
-
+                // no implementation
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-
+                // no implementation
             }
         });
     }
@@ -254,6 +254,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         slideOutAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(final Animation animation) {
+                // no implementation
             }
 
             @Override
@@ -266,6 +267,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
             @Override
             public void onAnimationRepeat(final Animation animation) {
+                // no implementation
             }
         });
 
@@ -337,7 +339,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         return new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-
+                // no implementation
             }
 
             @Override
@@ -347,12 +349,12 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
             @Override
             public void onAnimationCancel(Animator animation) {
-
+                // no implementation
             }
 
             @Override
             public void onAnimationRepeat(Animator animation) {
-
+                // no implementation
             }
         };
     }
