@@ -197,6 +197,11 @@ public class CookieBar {
             params.customView = customView;
             return this;
         }
+    
+        public Builder setAnimationDuration(long duration) {
+            params.animationDuration = duration;
+            return this;
+        }
 
         public CookieBar create() {
             return new CookieBar(context, params);
@@ -222,6 +227,7 @@ public class CookieBar {
         public int messageColor;
         public int actionColor;
         public long duration = 2000;
+        public long animationDuration = 300;
         public int layoutGravity = Gravity.TOP;
         public AnimatorSet iconAnimator;
         public int customView;

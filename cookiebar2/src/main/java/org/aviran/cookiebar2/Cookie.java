@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 final class Cookie extends LinearLayout implements View.OnTouchListener {
 
-    private long slideOutAnimationDuration = 500;
+    private long slideOutAnimationDuration = 300;
     private Animation slideOutAnimation;
 
     private ViewGroup layoutCookie;
@@ -31,6 +31,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     private ImageView ivIcon;
     private TextView btnAction;
     private long duration = 2000;
+    private long animationDuration = 300;
     private int layoutGravity = Gravity.BOTTOM;
     private float initialDragX;
     private float dismissOffsetThreshold;
@@ -115,6 +116,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
         duration = params.duration;
         layoutGravity = params.layoutGravity;
+        animationDuration = params.animationDuration;
 
         //Icon
         if (params.iconResId != 0) {
@@ -214,13 +216,14 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
                 // no implementation
             }
         });
-
+        slideInAnimation.setDuration(animationDuration);
         setAnimation(slideInAnimation);
     }
 
     private void createOutAnim() {
         slideOutAnimation = AnimationUtils.loadAnimation(getContext(),
                 layoutGravity == Gravity.BOTTOM ? R.anim.slide_out_to_bottom : R.anim.slide_out_to_top);
+        slideOutAnimation.setDuration(animationDuration);
         slideOutAnimationDuration = slideOutAnimation.getDuration();
         slideOutAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
