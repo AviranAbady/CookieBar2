@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.support.annotation.AnimatorRes;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.view.Gravity;
 import android.view.View;
@@ -102,6 +103,10 @@ public class CookieBar {
 
         parent.addView(cookie);
     }
+    
+    public View getView() {
+        return cookieView;
+    }
 
     public static class Builder {
 
@@ -188,7 +193,7 @@ public class CookieBar {
             return this;
         }
 
-        public Builder setCustomView(View customView) {
+        public Builder setCustomView(@LayoutRes int customView) {
             params.customView = customView;
             return this;
         }
@@ -219,6 +224,6 @@ public class CookieBar {
         public long duration = 2000;
         public int layoutGravity = Gravity.TOP;
         public AnimatorSet iconAnimator;
-        public View customView;
+        public int customView;
     }
 }

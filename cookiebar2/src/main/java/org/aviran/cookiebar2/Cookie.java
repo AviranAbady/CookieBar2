@@ -3,6 +3,7 @@ package org.aviran.cookiebar2;
 import android.animation.Animator;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -54,12 +55,10 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         return layoutGravity;
     }
 
-    private void initViews(View rootView) {
+    private void initViews(@LayoutRes int rootView) {
 
-        if (rootView != null) {
-            addView(rootView, new ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
+        if (rootView != 0) {
+            inflate(getContext(), rootView, this);
         } else {
             inflate(getContext(), R.layout.layout_cookie, this);
         }
