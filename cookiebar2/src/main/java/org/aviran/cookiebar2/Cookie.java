@@ -37,8 +37,10 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     private float dismissOffsetThreshold;
     private float viewWidth;
     private boolean swipedOut;
-
-
+    private int[] animationIn;
+    private int[] animationOut;
+    
+    
     public Cookie(@NonNull final Context context) {
         this(context, null);
     }
@@ -117,6 +119,8 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         duration = params.duration;
         layoutGravity = params.layoutGravity;
         animationDuration = params.animationDuration;
+        animationIn = params.animationIn;
+        animationOut = params.animationOut;
 
         //Icon
         if (params.iconResId != 0) {
@@ -193,8 +197,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     }
 
     private void createInAnim() {
-        Animation slideInAnimation = AnimationUtils.loadAnimation(getContext(),
-                layoutGravity == Gravity.BOTTOM ? R.anim.slide_in_from_bottom : R.anim.slide_in_from_top);
+        Animation slideInAnimation = AnimationUtils.loadAnimation(getContext(), (layoutGravity == Gravity.BOTTOM) ? animationIn[0] : animationIn[1]);
         slideInAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -221,8 +224,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     }
 
     private void createOutAnim() {
-        slideOutAnimation = AnimationUtils.loadAnimation(getContext(),
-                layoutGravity == Gravity.BOTTOM ? R.anim.slide_out_to_bottom : R.anim.slide_out_to_top);
+        slideOutAnimation = AnimationUtils.loadAnimation(getContext(), layoutGravity == Gravity.BOTTOM ? animationOut[0] : animationOut[1]);
         slideOutAnimation.setDuration(animationDuration);
         slideOutAnimationDuration = slideOutAnimation.getDuration();
         slideOutAnimation.setAnimationListener(new Animation.AnimationListener() {

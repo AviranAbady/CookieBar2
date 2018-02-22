@@ -3,6 +3,7 @@ package org.aviran.cookiebar2;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.app.Activity;
+import android.support.annotation.AnimRes;
 import android.support.annotation.AnimatorRes;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -202,6 +203,16 @@ public class CookieBar {
             params.animationDuration = duration;
             return this;
         }
+        
+        public Builder setAnimationIn(@AnimRes int[] animationIn) {
+            params.animationIn = animationIn;
+            return this;
+        }
+    
+        public Builder setAnimationOut(@AnimRes int[] animationOut) {
+            params.animationOut = animationOut;
+            return this;
+        }
 
         public CookieBar create() {
             return new CookieBar(context, params);
@@ -231,5 +242,7 @@ public class CookieBar {
         public int layoutGravity = Gravity.TOP;
         public AnimatorSet iconAnimator;
         public int customView;
+        public int[] animationIn = new int[]{R.anim.slide_in_from_bottom, R.anim.slide_in_from_top};
+        public int[] animationOut = new int[]{R.anim.slide_out_to_bottom, R.anim.slide_out_to_top};
     }
 }
