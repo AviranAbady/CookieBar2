@@ -235,7 +235,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                // no implementation
+                setVisibility(GONE);
             }
 
             @Override
