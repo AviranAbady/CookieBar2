@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
                         .setMessage(R.string.top_cookie_message)
                         .setIcon(R.drawable.ic_android_white_48dp)
                         .setDuration(5000)
+                        .setAnimationOut(new int[]{R.anim.fade_out,R.anim.fade_out})
                         .show();
             }
         });

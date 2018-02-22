@@ -235,7 +235,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                setVisibility(GONE);
+                //
             }
 
             @Override
@@ -266,6 +266,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
                 if (listener != null) {
                     listener.onDismiss();
                 }
+                setVisibility(View.GONE);
                 removeFromParent();
             }
 
