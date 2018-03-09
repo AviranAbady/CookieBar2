@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
                         .setMessage(R.string.top_cookie_message)
                         .setIcon(R.drawable.ic_android_white_48dp)
                         .setDuration(5000)
+                        .setAnimationOut(new int[]{R.anim.fade_out,R.anim.fade_out})
                         .show();
             }
         });
@@ -118,10 +119,11 @@ public class MainActivity extends AppCompatActivity {
                 final ProgressBar progressBar = customView.findViewById(R.id.cookiebar_progressbar);
 
                 CookieBar.build(MainActivity.this)
-                        .setCustomView(customView)
+                        .setCustomView(R.layout.custom_cookie)
                         .setTitle(R.string.plain_cookie_title)
                         .setMessage(R.string.custom_view_cookie_message)
                         .setDuration(10000)
+                        .setLayoutGravity(Gravity.BOTTOM)
                         .setAction("Hide Progress bar", new OnActionClickListener() {
                             @Override
                             public void onClick() {

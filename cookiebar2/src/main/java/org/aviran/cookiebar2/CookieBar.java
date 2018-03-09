@@ -3,9 +3,11 @@ package org.aviran.cookiebar2;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.app.Activity;
+import android.support.annotation.AnimRes;
 import android.support.annotation.AnimatorRes;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.view.Gravity;
 import android.view.View;
@@ -102,6 +104,10 @@ public class CookieBar {
 
         parent.addView(cookie);
     }
+    
+    public View getView() {
+        return cookieView;
+    }
 
     public static class Builder {
 
@@ -188,8 +194,23 @@ public class CookieBar {
             return this;
         }
 
-        public Builder setCustomView(View customView) {
+        public Builder setCustomView(@LayoutRes int customView) {
             params.customView = customView;
+            return this;
+        }
+    
+        public Builder setAnimationDuration(long duration) {
+            params.animationDuration = duration;
+            return this;
+        }
+        
+        public Builder setAnimationIn(@AnimRes int[] animationIn) {
+            params.animationIn = animationIn;
+            return this;
+        }
+    
+        public Builder setAnimationOut(@AnimRes int[] animationOut) {
+            params.animationOut = animationOut;
             return this;
         }
 
@@ -217,8 +238,11 @@ public class CookieBar {
         public int messageColor;
         public int actionColor;
         public long duration = 2000;
+        public long animationDuration = 300;
         public int layoutGravity = Gravity.TOP;
         public AnimatorSet iconAnimator;
-        public View customView;
+        public int customView;
+        public int[] animationIn = new int[]{R.anim.slide_in_from_bottom, R.anim.slide_in_from_top};
+        public int[] animationOut = new int[]{R.anim.slide_out_to_bottom, R.anim.slide_out_to_top};
     }
 }

@@ -167,9 +167,6 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-gradlew
-gradlew.bat
-gradle/
 
 # End of https://www.gitignore.io/api/android,androidstudio
 
