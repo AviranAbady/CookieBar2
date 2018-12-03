@@ -5,19 +5,26 @@
     <string name="cookie_action">Action</string>
     <string name="top_cookie_title">Top cookie with an icon</string>
     <string name="top_cookie_message">This is a top cookie with an icon.</string>
+    <string name="custom_anim_cookie_title">This cookie has custom in/out animations</string>
+    <string name="custom_anim_cookie_message">Did you notice it entered from the left?\nCan you guess how it will leave the screen?\nIf you guessed from the right, you\'re right!</string>
     <string name="bottom_cookie_title">Bottom cookie with and icon</string>
     <string name="bottom_cookie_message">This is a bottom cookie with an icon and an action. Nice right?</string>
     <string name="fancy_cookie_title">Icons can be animated</string>
     <string name="fancy_cookie_message">Fancy animations will make your cookies super exciting.</string>
     <string name="plain_cookie_title">Title</string>
     <string name="plain_cookie_message">This is the default plain cookie</string>
-    <string name="large_cookie_title">This is an extra large cookie</string>
-    <string name="large_cookie_message">Cookies can be extra large!\n\n
-#1: Chocolate Chip Cookies.\n
-#2: Chocolate Cookies.\n
-#3: Oatmeal Chocolate Chip Cookies.\n
-#4: Peanut Butter Cookies.\n
-#5: Abady Cookies.</string>
-    <string name="custom_view_cookie_message">Custom view cookie</string>
+    <string name="custom_view_cookie_title">Custom cookie view demo!</string>
+    <string name="custom_view_cookie_message">You can customize CookieBar2\nHere\'s an example of a simple dialog.</string>
+    <string name="save">Save</string>
+    <string name="open">Open</string>
+    <string name="newBtn">New</string>
+    <string name="clicked">Clicked!</string>
+    <string name="top_cookie">Top Cookie</string>
+    <string name="custom_animations">Custom Animations</string>
+    <string name="bottom_cookie">Bottom Cookie</string>
+    <string name="fancy_bottom_cookie">Fancy Bottom Cookie</string>
+    <string name="custom_view_cookie">Custom View Cookie</string>
+    <string name="custom_message">Custom message</string>
+    <string name="custom_title">Custom Title</string>
 </resources>
 
