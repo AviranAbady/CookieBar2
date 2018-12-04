@@ -1,4 +1,4 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CookieBar2-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6122) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6474fc01133444e0b6f615d9b1af8589)](https://www.codacy.com/app/AviranAbady/CookieBar2?utm_source=github.com&utm_medium=referral&utm_content=AviranAbady/CookieBar2&utm_campaign=badger)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CookieBar2-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6122) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6474fc01133444e0b6f615d9b1af8589)](https://www.codacy.com/app/AviranAbady/CookieBar2?utm_source=github.com&utm_medium=referral&utm_content=AviranAbady/CookieBar2&utm_campaign=badger) [![AndroidWeekly335](https://raw.githubusercontent.com/AviranAbady/storage/master/AndroidWeekly335.png)](http://androidweekly.net/issues/issue-335)
 
 CookieBar 2
 ===============
@@ -11,7 +11,7 @@ implementation 'org.aviran.cookiebar2:cookiebar2:1.1.0'
 ## Screenshot
 <img src="https://raw.githubusercontent.com/AviranAbady/storage/master/cookiebar2_1.1.0.gif">
 
-Main differences from the original <a href="https://github.com/liuguangqiang/CookieBar/">Cookiebar</a> are:
+Main differences from the original Cookiebar library are:
 
 * Swipe to dismiss has been added.
 * Programmatic dismiss functionality added.
@@ -132,7 +132,7 @@ CookieBar.build(MainActivity.this)
 
 ## Dynamically set cookie properties
  * Cookie position (Top/Bottom)
- * Display Duration
+ * Display duration
  * Title text color
  * Body text color
  * Action text color
@@ -142,9 +142,12 @@ CookieBar.build(MainActivity.this)
  * In/Out animations for the entire view
  * View layout
 
+## Attribution
+Forked from the early code base of CookieBar, by Eric Liu.
+
 ## License
 
-    Copyright 2017
+    Copyright 2018, Aviran Abady.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

@@ -10,7 +10,7 @@ class ThemeResolver {
         return getColor(context, attr, 0);
     }
 
-    static int getColor(Context context, @AttrRes int attr, int defaultColor) {
+    public static int getColor(Context context, @AttrRes int attr, int defaultColor) {
         TypedArray a = context.getTheme().obtainStyledAttributes(new int[]{attr});
         try {
             return a.getColor(0, defaultColor);
