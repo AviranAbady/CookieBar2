@@ -1,14 +1,12 @@
 package org.aviran.cookiebarsample;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
+
 import org.aviran.cookiebar2.CookieBar;
 import org.aviran.cookiebar2.OnActionClickListener;
 
@@ -29,12 +27,11 @@ public class MainActivity extends AppCompatActivity {
                         .setMessage(R.string.top_cookie_message)
                         .setIcon(R.drawable.ic_android_white_48dp)
                         .setDuration(5000)
-                        .setAnimationOut(new int[]{R.anim.fade_out,R.anim.fade_out})
                         .show();
             }
         });
 
-        Button btnBottom = findViewById(R.id.btn_bottom);
+        final Button btnBottom = findViewById(R.id.btn_bottom);
         btnBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                         .setBackgroundColor(R.color.colorPrimary)
                         .setActionColor(R.color.yellow)
                         .setTitleColor(R.color.yellow)
-                        .setLayoutGravity(Gravity.BOTTOM)
+                        .setCookiePosition(CookieBar.BOTTOM)
                         .setAction(R.string.cookie_action, new OnActionClickListener() {
                             @Override
                             public void onClick() {
@@ -56,6 +53,25 @@ public class MainActivity extends AppCompatActivity {
                         .show();
             }
         });
+
+
+        Button btnCustomAnimation = findViewById(R.id.btn_custom_anim);
+        btnCustomAnimation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CookieBar.build(MainActivity.this)
+                        .setTitle(R.string.custom_anim_cookie_title)
+                        .setMessage(R.string.custom_anim_cookie_message)
+                        .setIcon(R.drawable.ic_android_white_48dp)
+                        .setMessageColor(R.color.liteblue)
+                        .setBackgroundColor(R.color.orange)
+                        .setDuration(5000)
+                        .setAnimationIn(android.R.anim.slide_in_left, android.R.anim.slide_in_left)
+                        .setAnimationOut(android.R.anim.slide_out_right, android.R.anim.slide_out_right)
+                        .show();
+            }
+        });
+
 
         Button btnBottomAnimated = findViewById(R.id.btn_bottom_animated);
         btnBottomAnimated.setOnClickListener(new View.OnClickListener() {
@@ -82,63 +98,54 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button btnExtraLarge = findViewById(R.id.btn_extra_large);
-        btnExtraLarge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CookieBar.build(MainActivity.this)
-                        .setTitle(R.string.large_cookie_title)
-                        .setMessage(R.string.large_cookie_message)
-                        .setDuration(5000)
-                        .show();
-            }
-        });
-
-        Button btnPlain = findViewById(R.id.btn_plain);
-        btnPlain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CookieBar.build(MainActivity.this)
-                        .setTitle(R.string.plain_cookie_title)
-                        .setMessage(R.string.plain_cookie_message)
-                        .setDuration(5000)
-                        .show();
-            }
-        });
-
         Button btnCustomView = findViewById(R.id.btn_custom_view);
         btnCustomView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-
-                final View customView =
-                        LayoutInflater.
-                        from(MainActivity.this).
-                        inflate(R.layout.custom_cookie, null);
-
-                final ProgressBar progressBar = customView.findViewById(R.id.cookiebar_progressbar);
 
                 CookieBar.build(MainActivity.this)
                         .setCustomView(R.layout.custom_cookie)
-                        .setTitle(R.string.plain_cookie_title)
-                        .setMessage(R.string.custom_view_cookie_message)
-                        .setDuration(10000)
-                        .setLayoutGravity(Gravity.BOTTOM)
-                        .setAction("Hide Progress bar", new OnActionClickListener() {
+                        .setCustomViewInitializer(new CookieBar.CustomViewInitializer() {
                             @Override
-                            public void onClick() {
-                                progressBar.setVisibility(View.GONE);
+                            public void initView(View view) {
+
+                                Button btnNew = view.findViewById(R.id.custom_cookie_btn_new);
+                                Button btnOpen = view.findViewById(R.id.custom_cookie_btn_open);
+                                Button btnSave = view.findViewById(R.id.custom_cookie_btn_save);
+
+                                View.OnClickListener btnListener = new View.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(View view) {
+                                        Button button = (Button) view;
+                                        button.setText(R.string.clicked);
+                                    }
+                                };
+
+                                btnNew.setOnClickListener(btnListener);
+                                btnOpen.setOnClickListener(btnListener);
+                                btnSave.setOnClickListener(btnListener);
                             }
                         })
+                        .setAction("Close", new OnActionClickListener() {
+                            @Override
+                            public void onClick() {
+                                CookieBar.dismiss(MainActivity.this);
+                            }
+                        })
+                        .setTitle(R.string.custom_view_cookie_title)
+                        .setMessage(R.string.custom_view_cookie_message)
+                        .setEnableAutoDismiss(false)
+                        .setSwipeToDismiss(false)
+                        .setCookiePosition(Gravity.BOTTOM)
                         .show();
-            }
+                }
         });
 
-        ImageView cookieMonster = findViewById(R.id.cookie_monster);
-
-        cookieMonster.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.activity_main).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 CookieBar.dismiss(MainActivity.this);
             }
         });

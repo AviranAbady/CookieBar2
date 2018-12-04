@@ -21,26 +21,26 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 final class Cookie extends LinearLayout implements View.OnTouchListener {
-
-    private long slideOutAnimationDuration = 300;
     private Animation slideOutAnimation;
-
     private ViewGroup layoutCookie;
     private TextView tvTitle;
     private TextView tvMessage;
     private ImageView ivIcon;
     private TextView btnAction;
     private long duration = 2000;
-    private long animationDuration = 300;
     private int layoutGravity = Gravity.BOTTOM;
     private float initialDragX;
     private float dismissOffsetThreshold;
     private float viewWidth;
     private boolean swipedOut;
-    private int[] animationIn;
-    private int[] animationOut;
-    
-    
+    private int animationInTop;
+    private int animationInBottom;
+    private int animationOutTop;
+    private int animationOutBottom;
+    private boolean isAutoDismissEnabled;
+    private boolean isSwipeable;
+
+
     public Cookie(@NonNull final Context context) {
         this(context, null);
     }
@@ -58,10 +58,12 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         return layoutGravity;
     }
 
-    private void initViews(@LayoutRes int rootView) {
-
+    private void initViews(@LayoutRes int rootView, CookieBar.CustomViewInitializer viewInitializer) {
         if (rootView != 0) {
             inflate(getContext(), rootView, this);
+            if (viewInitializer != null) {
+                viewInitializer.initView(getChildAt(0));
+            }
         } else {
             inflate(getContext(), R.layout.layout_cookie, this);
         }
@@ -114,13 +116,17 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     }
 
     public void setParams(final CookieBar.Params params) {
-        initViews(params.customView);
+        initViews(params.customViewResource, params.viewInitializer);
 
         duration = params.duration;
-        layoutGravity = params.layoutGravity;
-        animationDuration = params.animationDuration;
-        animationIn = params.animationIn;
-        animationOut = params.animationOut;
+        layoutGravity = params.cookiePosition;
+        animationInTop = params.animationInTop;
+        animationInBottom = params.animationInBottom;
+        animationOutTop = params.animationOutTop;
+        animationOutBottom = params.animationOutBottom;
+        isSwipeable = params.enableSwipeToDismiss;
+        isAutoDismissEnabled = params.enableAutoDismiss;
+
 
         //Icon
         if (params.iconResId != 0) {
@@ -129,7 +135,6 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
             if (params.iconAnimator != null) {
                 params.iconAnimator.setTarget(ivIcon);
                 params.iconAnimator.start();
-
             }
         }
 
@@ -197,7 +202,8 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     }
 
     private void createInAnim() {
-        Animation slideInAnimation = AnimationUtils.loadAnimation(getContext(), (layoutGravity == Gravity.BOTTOM) ? animationIn[0] : animationIn[1]);
+        int animationResId = layoutGravity == Gravity.BOTTOM ? animationInBottom : animationInTop;
+        Animation slideInAnimation = AnimationUtils.loadAnimation(getContext(), animationResId);
         slideInAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -206,6 +212,10 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                if (!isAutoDismissEnabled) {
+                    return;
+                }
+
                 postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -219,30 +229,13 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
                 // no implementation
             }
         });
-        slideInAnimation.setDuration(animationDuration);
+
         setAnimation(slideInAnimation);
     }
 
     private void createOutAnim() {
-        slideOutAnimation = AnimationUtils.loadAnimation(getContext(), layoutGravity == Gravity.BOTTOM ? animationOut[0] : animationOut[1]);
-        slideOutAnimation.setDuration(animationDuration);
-        slideOutAnimationDuration = slideOutAnimation.getDuration();
-        slideOutAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                // no implementation
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                //
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-                // no implementation
-            }
-        });
+        int animationResId = layoutGravity == Gravity.BOTTOM ? animationOutBottom : animationOutTop;
+        slideOutAnimation = AnimationUtils.loadAnimation(getContext(), animationResId);
     }
 
     public void dismiss() {
@@ -276,8 +269,8 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
             }
         });
 
-        long speed = listener == null ? slideOutAnimationDuration : slideOutAnimationDuration / 2;
-        slideOutAnimation.setDuration(speed);
+//        long speed = listener == null ? slideOutAnimationDuration : slideOutAnimationDuration / 2;
+//        slideOutAnimation.setDuration(speed);
         startAnimation(slideOutAnimation);
     }
 
@@ -296,6 +289,10 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
+        if(!isSwipeable) {
+            return true;
+        }
+
         switch (motionEvent.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 initialDragX = motionEvent.getRawX();

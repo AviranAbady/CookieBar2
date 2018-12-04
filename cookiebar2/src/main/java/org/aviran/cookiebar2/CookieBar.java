@@ -13,17 +13,19 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
 /**
  * CookieBar is a lightweight library for showing a brief message at the top or bottom of the
  * screen.
- *
+ * <p>
  * CookieBar
- *      .build(MainActivity.this)
- *      .setTitle("TITLE")
- *      .setMessage("MESSAGE")
- *      .setAction("ACTION", new OnActionClickListener() {})
- *      .show();
- *
+ * .build(MainActivity.this)
+ * .setTitle("TITLE")
+ * .setMessage("MESSAGE")
+ * .setAction("ACTION", new OnActionClickListener() {})
+ * .show();
  */
 public class CookieBar {
     private Cookie cookieView;
@@ -39,7 +41,7 @@ public class CookieBar {
 
     private CookieBar(Activity context, Params params) {
         this.context = context;
-        if(params == null) {
+        if (params == null) {
             // since params is null, this CookieBar object can only be used to dismiss
             // existing cookies
             dismiss();
@@ -71,10 +73,10 @@ public class CookieBar {
     }
 
     private void removeFromParent(ViewGroup parent) {
-        int childCount = parent .getChildCount();
+        int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
             View child = parent.getChildAt(i);
-            if(child instanceof Cookie) {
+            if (child instanceof Cookie) {
                 ((Cookie) child).dismiss();
                 return;
             }
@@ -83,15 +85,15 @@ public class CookieBar {
     }
 
     private void addCookie(final ViewGroup parent, final Cookie cookie) {
-        if(cookie.getParent() != null) {
+        if (cookie.getParent() != null) {
             return;
         }
 
         // if exists, remove existing cookie
-        int childCount = parent .getChildCount();
+        int childCount = parent.getChildCount();
         for (int i = 0; i < childCount; i++) {
             View child = parent.getChildAt(i);
-            if(child instanceof Cookie) {
+            if (child instanceof Cookie) {
                 ((Cookie) child).dismiss(new Cookie.CookieBarDismissListener() {
                     @Override
                     public void onDismiss() {
@@ -104,7 +106,7 @@ public class CookieBar {
 
         parent.addView(cookie);
     }
-    
+
     public View getView() {
         return cookieView;
     }
@@ -113,12 +115,12 @@ public class CookieBar {
 
         private final Params params = new Params();
 
-        public final Activity context;
+        final Activity context;
 
         /**
          * Create a builder for an cookie.
          */
-        public Builder(Activity activity) {
+        Builder(Activity activity) {
             this.context = activity;
         }
 
@@ -189,28 +191,63 @@ public class CookieBar {
             return this;
         }
 
+        /**
+         * Sets cookie position
+         *
+         * @deprecated As of CookieBar2 1.1.0, use
+         *             {@link #setCookiePosition(int)} instead.
+
+         * @param layoutGravity Cookie position, use either CookieBar.TOP or CookieBar.BOTTOM
+         * @return builder
+         */
+        @Deprecated
         public Builder setLayoutGravity(int layoutGravity) {
-            params.layoutGravity = layoutGravity;
+            return setCookiePosition(layoutGravity);
+        }
+
+
+        /**
+         * Sets cookie position
+         *
+         * @param cookiePosition Cookie position, use either CookieBar.TOP or CookieBar.BOTTOM
+         * @return builder
+         */
+        public Builder setCookiePosition(int cookiePosition) {
+            params.cookiePosition = cookiePosition;
             return this;
         }
 
+
         public Builder setCustomView(@LayoutRes int customView) {
-            params.customView = customView;
+            params.customViewResource = customView;
             return this;
         }
-    
-        public Builder setAnimationDuration(long duration) {
-            params.animationDuration = duration;
+
+        public Builder setCustomViewInitializer(CustomViewInitializer viewInitializer) {
+            params.viewInitializer = viewInitializer;
             return this;
         }
-        
-        public Builder setAnimationIn(@AnimRes int[] animationIn) {
-            params.animationIn = animationIn;
+
+        public Builder setAnimationIn(@AnimRes int topAnimation, @AnimRes int bottomAnimation) {
+            params.animationInTop = topAnimation;
+            params.animationInBottom = bottomAnimation;
             return this;
         }
-    
-        public Builder setAnimationOut(@AnimRes int[] animationOut) {
-            params.animationOut = animationOut;
+
+        public Builder setAnimationOut(@AnimRes int topAnimation, @AnimRes int bottomAnimation) {
+            params.animationOutTop = topAnimation;
+            params.animationOutBottom = bottomAnimation;
+            return this;
+        }
+
+
+        public Builder setEnableAutoDismiss(boolean enableAutoDismiss) {
+            params.enableAutoDismiss = enableAutoDismiss;
+            return this;
+        }
+
+        public Builder setSwipeToDismiss(boolean enableSwipeToDismiss) {
+            params.enableSwipeToDismiss = enableSwipeToDismiss;
             return this;
         }
 
@@ -231,18 +268,29 @@ public class CookieBar {
         public String title;
         public String message;
         public String action;
-        public OnActionClickListener onActionClickListener;
-        public int iconResId;
-        public int backgroundColor;
-        public int titleColor;
-        public int messageColor;
-        public int actionColor;
-        public long duration = 2000;
-        public long animationDuration = 300;
-        public int layoutGravity = Gravity.TOP;
-        public AnimatorSet iconAnimator;
-        public int customView;
-        public int[] animationIn = new int[]{R.anim.slide_in_from_bottom, R.anim.slide_in_from_top};
-        public int[] animationOut = new int[]{R.anim.slide_out_to_bottom, R.anim.slide_out_to_top};
+        boolean enableSwipeToDismiss = true;
+        boolean enableAutoDismiss = true;
+        int iconResId;
+        int backgroundColor;
+        int titleColor;
+        int messageColor;
+        int actionColor;
+        long duration = 2000;
+        int cookiePosition = Gravity.TOP;
+        int customViewResource;
+        int animationInTop = R.anim.slide_in_from_top;
+        int animationInBottom = R.anim.slide_in_from_bottom;
+        int animationOutTop = R.anim.slide_out_to_top;
+        int animationOutBottom = R.anim.slide_out_to_bottom;
+        CustomViewInitializer viewInitializer;
+        OnActionClickListener onActionClickListener;
+        AnimatorSet iconAnimator;
     }
+
+    public interface CustomViewInitializer {
+        void initView(View view);
+    }
+
+    public static final int TOP = Gravity.TOP;
+    public static final int BOTTOM = Gravity.BOTTOM;
 }
