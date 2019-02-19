@@ -216,12 +216,14 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
                     return;
                 }
 
-                postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        dismiss();
-                    }
-                }, duration);
+                if (duration > CookieBar.INFINITE_DURATION) {
+                    postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            dismiss();
+                        }
+                    }, duration);
+                }
             }
 
             @Override

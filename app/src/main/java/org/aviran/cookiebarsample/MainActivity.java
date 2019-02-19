@@ -143,6 +143,29 @@ public class MainActivity extends AppCompatActivity {
                 }
         });
 
+        Button btnInfiniteView = findViewById(R.id.btn_infinite_duration);
+        btnInfiniteView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                CookieBar.build(MainActivity.this)
+                        .setTitle(R.string.infinite_cookie_title)
+                        .setTitleColor(R.color.yellow)
+                        .setMessage(R.string.infinite_cookie_message)
+                        .setIcon(R.drawable.ic_android_white_48dp)
+                        .setDuration(CookieBar.INFINITE_DURATION)
+                        .setAction(R.string.dismiss, new OnActionClickListener() {
+                            @Override
+                            public void onClick() {
+                                CookieBar.dismiss(MainActivity.this);
+                            }
+                        })
+                        .show();
+            }
+        });
+
+
         findViewById(R.id.activity_main).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
