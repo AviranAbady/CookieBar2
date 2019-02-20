@@ -27,7 +27,7 @@ import android.view.ViewGroup;
 public class CookieBar {
     public static final int TOP = Gravity.TOP;
     public static final int BOTTOM = Gravity.BOTTOM;
-    public static final int INFINITE_DURATION = -1;
+    public static final long INFINITE_DURATION = -1;
 
     private Cookie cookieView;
     private final Activity context;
