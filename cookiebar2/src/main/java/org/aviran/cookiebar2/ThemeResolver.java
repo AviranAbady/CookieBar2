@@ -19,4 +19,13 @@ class ThemeResolver {
         }
     }
 
+    public static int getDimen(Context context, @AttrRes int attr, int defaultSize) {
+        TypedArray a = context.getTheme().obtainStyledAttributes(new int[]{attr});
+        try {
+            return a.getDimensionPixelSize(0, defaultSize);
+        } finally {
+            a.recycle();
+        }
+    }
+
 }
