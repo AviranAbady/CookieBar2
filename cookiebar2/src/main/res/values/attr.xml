@@ -7,9 +7,9 @@
         <attr name="cookieActionColor" format="color"/>
         <attr name="cookieBackgroundColor" format="color"/>
 
-        <attr name="titleTextSize" format="dimension"/>
-        <attr name="messageTextSize" format="dimension"/>
-        <attr name="actionTextSize" format="dimension"/>
+        <attr name="cookieTitleSize" format="dimension"/>
+        <attr name="cookieMessageSize" format="dimension"/>
+        <attr name="cookieActionSize" format="dimension"/>
         <attr name="cookiePadding" format="dimension"/>
     </declare-styleable>
 

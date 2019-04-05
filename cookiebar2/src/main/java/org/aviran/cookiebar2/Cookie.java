@@ -3,12 +3,14 @@ package org.aviran.cookiebar2;
 import android.animation.Animator;
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.AttrRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -149,6 +151,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
             if (params.titleColor != 0) {
                 tvTitle.setTextColor(ContextCompat.getColor(getContext(), params.titleColor));
             }
+            setDefaultTextSize(tvTitle, R.attr.cookieTitleSize);
         }
 
         //Message
@@ -158,6 +161,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
             if (params.messageColor != 0) {
                 tvMessage.setTextColor(ContextCompat.getColor(getContext(), params.messageColor));
             }
+            setDefaultTextSize(tvMessage, R.attr.cookieMessageSize);
         }
 
         //Action
@@ -176,6 +180,8 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
             if (params.actionColor != 0) {
                 btnAction.setTextColor(ContextCompat.getColor(getContext(), params.actionColor));
             }
+
+            setDefaultTextSize(btnAction, R.attr.cookieActionSize);
         }
 
         //Background
@@ -193,6 +199,13 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
         createInAnim();
         createOutAnim();
+    }
+
+    private void setDefaultTextSize(TextView textView, @AttrRes int attr) {
+        float size = ThemeResolver.getDimen(getContext(), attr, 0);
+        if(size > 0) {
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
+        }
     }
 
     @Override

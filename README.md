@@ -5,7 +5,7 @@ CookieBar 2
 CookieBar is a lightweight library for showing a brief message at the top or bottom of the screen.<br/><br/>
 
 ```gradle
-implementation 'org.aviran.cookiebar2:cookiebar2:1.1.1'
+implementation 'org.aviran.cookiebar2:cookiebar2:1.1.2'
 ```
 
 ## Screenshot
@@ -127,6 +127,10 @@ CookieBar.build(MainActivity.this)
    <item name="cookieMessageColor">@color/default_message_color</item>
    <item name="cookieActionColor">@color/default_action_color</item>
    <item name="cookieBackgroundColor">@color/default_bg_color</item>
+   <item name="cookiePadding">24dp</item>
+   <item name="cookieTitleSize">24sp</item>
+   <item name="cookieMessageSize">16sp</item>
+   <item name="cookieActionSize">18sp</item>
 </style>
 ```
 
