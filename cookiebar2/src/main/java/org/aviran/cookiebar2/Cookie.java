@@ -68,6 +68,11 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
             inflate(getContext(), R.layout.layout_cookie, this);
         }
 
+        if (getChildAt(0).getLayoutParams() instanceof LinearLayout.LayoutParams) {
+            LinearLayout.LayoutParams lp = (LayoutParams) (getChildAt(0).getLayoutParams());
+            lp.gravity = Gravity.BOTTOM;
+        }
+
         layoutCookie = findViewById(R.id.cookie);
         tvTitle = findViewById(R.id.tv_title);
         tvMessage = findViewById(R.id.tv_message);
