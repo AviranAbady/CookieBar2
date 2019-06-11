@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import org.aviran.cookiebar2.CookieBar;
+import org.aviran.cookiebar2.CookieBarDismissListener;
 import org.aviran.cookiebar2.OnActionClickListener;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +28,33 @@ public class MainActivity extends AppCompatActivity {
                         .setMessage(R.string.top_cookie_message)
                         .setIcon(R.drawable.ic_android_white_48dp)
                         .setDuration(5000)
+                        .setCookieListener(new CookieBarDismissListener() {
+
+                            @Override
+                            public void onDismiss(int dismissType) {
+                                String desc = "";
+                                switch (dismissType) {
+                                    case DismissType.DURATION_COMPLETE:
+                                        desc = "Cookie display duration completed";
+                                        break;
+                                    case DismissType.USER_DISMISS:
+                                        desc = "Cookie dismissed by user";
+                                        break;
+                                    case DismissType.USER_ACTION_CLICK:
+                                        desc = "Cookie dismissed by action click";
+                                        break;
+                                    case DismissType.PROGRAMMATIC_DISMISS:
+                                        desc = "Cookie dismissed programmatically";
+                                        break;
+                                    case DismissType.REPLACE_DISMISS:
+                                        desc = "Replaced by new cookie";
+                                        break;
+
+                                }
+
+                                Toast.makeText(MainActivity.this, desc, Toast.LENGTH_LONG).show();
+                            }
+                        })
                         .show();
             }
         });
@@ -87,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                         .setMessageColor(R.color.fancyMessage)
                         .setBackgroundColor(R.color.fancyBackground)
                         .setDuration(5000)
-                        .setLayoutGravity(Gravity.BOTTOM)
+                        .setCookiePosition(CookieBar.BOTTOM)
                         .setAction("OPEN SETTINGS", new OnActionClickListener() {
                             @Override
                             public void onClick() {
@@ -140,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                         .setSwipeToDismiss(false)
                         .setCookiePosition(Gravity.BOTTOM)
                         .show();
-                }
+            }
         });
 
         findViewById(R.id.activity_main).setOnClickListener(new View.OnClickListener() {
@@ -149,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
                 CookieBar.dismiss(MainActivity.this);
             }
         });
+
 
     }
 }

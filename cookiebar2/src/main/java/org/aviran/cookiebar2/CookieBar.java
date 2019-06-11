@@ -94,9 +94,14 @@ public class CookieBar {
         for (int i = 0; i < childCount; i++) {
             View child = parent.getChildAt(i);
             if (child instanceof Cookie) {
-                ((Cookie) child).dismiss(new Cookie.CookieBarDismissListener() {
+                Cookie currentCookie = (Cookie) child;
+                final CookieBarDismissListener dismissListener = currentCookie.getDismissListenr();
+                ((Cookie) child).dismiss(new CookieBarDismissListener() {
                     @Override
-                    public void onDismiss() {
+                    public void onDismiss(int dismissType) {
+                        if(dismissListener != null) {
+                            dismissListener.onDismiss(DismissType.REPLACE_DISMISS);
+                        }
                         parent.addView(cookie);
                     }
                 });
@@ -250,6 +255,11 @@ public class CookieBar {
             return this;
         }
 
+        public Builder setCookieListener(CookieBarDismissListener dismissListener) {
+            params.dismissListener = dismissListener;
+            return this;
+        }
+
         public CookieBar create() {
             return new CookieBar(context, params);
         }
@@ -284,6 +294,7 @@ public class CookieBar {
         public CustomViewInitializer viewInitializer;
         public OnActionClickListener onActionClickListener;
         public AnimatorSet iconAnimator;
+        public CookieBarDismissListener dismissListener;
     }
 
     public interface CustomViewInitializer {

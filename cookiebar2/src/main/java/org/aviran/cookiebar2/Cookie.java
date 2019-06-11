@@ -21,6 +21,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import org.aviran.cookiebar2.CookieBarDismissListener.DismissType;
 
 final class Cookie extends LinearLayout implements View.OnTouchListener {
     private Animation slideOutAnimation;
@@ -41,6 +42,9 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     private int animationOutBottom;
     private boolean isAutoDismissEnabled;
     private boolean isSwipeable;
+    private CookieBarDismissListener dismissListener;
+    private boolean actionClickDismiss;
+    private boolean timeOutDismiss;
 
 
     public Cookie(@NonNull final Context context) {
@@ -132,9 +136,9 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         animationOutBottom = params.animationOutBottom;
         isSwipeable = params.enableSwipeToDismiss;
         isAutoDismissEnabled = params.enableAutoDismiss;
+        dismissListener = params.dismissListener;
+        final OnActionClickListener actionClickListener = params.onActionClickListener;
 
-
-        //Icon
         if (params.iconResId != 0) {
             ivIcon.setVisibility(VISIBLE);
             ivIcon.setBackgroundResource(params.iconResId);
@@ -144,7 +148,6 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
             }
         }
 
-        //Title
         if (!TextUtils.isEmpty(params.title)) {
             tvTitle.setVisibility(VISIBLE);
             tvTitle.setText(params.title);
@@ -154,7 +157,6 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
             setDefaultTextSize(tvTitle, R.attr.cookieTitleSize);
         }
 
-        //Message
         if (!TextUtils.isEmpty(params.message)) {
             tvMessage.setVisibility(VISIBLE);
             tvMessage.setText(params.message);
@@ -164,19 +166,18 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
             setDefaultTextSize(tvMessage, R.attr.cookieMessageSize);
         }
 
-        //Action
-        if (!TextUtils.isEmpty(params.action) && params.onActionClickListener != null) {
+        if (!TextUtils.isEmpty(params.action) && actionClickListener != null) {
             btnAction.setVisibility(VISIBLE);
             btnAction.setText(params.action);
             btnAction.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    params.onActionClickListener.onClick();
+                    actionClickListener.onClick();
+                    actionClickDismiss = true;
                     dismiss();
                 }
             });
 
-            //Action Color
             if (params.actionColor != 0) {
                 btnAction.setTextColor(ContextCompat.getColor(getContext(), params.actionColor));
             }
@@ -184,7 +185,6 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
             setDefaultTextSize(btnAction, R.attr.cookieActionSize);
         }
 
-        //Background
         if (params.backgroundColor != 0) {
             layoutCookie
                     .setBackgroundColor(ContextCompat.getColor(getContext(), params.backgroundColor));
@@ -203,7 +203,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
     private void setDefaultTextSize(TextView textView, @AttrRes int attr) {
         float size = ThemeResolver.getDimen(getContext(), attr, 0);
-        if(size > 0) {
+        if (size > 0) {
             textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
         }
     }
@@ -238,6 +238,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
                 postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        timeOutDismiss = true;
                         dismiss();
                     }
                 }, duration);
@@ -261,9 +262,19 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         dismiss(null);
     }
 
+    public CookieBarDismissListener getDismissListenr() {
+        return dismissListener;
+    }
+
     public void dismiss(final CookieBarDismissListener listener) {
+        getHandler().removeCallbacksAndMessages(null);
+        if(listener != null) {
+            dismissListener = listener;
+        }
+
         if (swipedOut) {
             removeFromParent();
+            cookieListenerDismiss(DismissType.USER_DISMISS);
             return;
         }
 
@@ -275,11 +286,9 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
             @Override
             public void onAnimationEnd(final Animation animation) {
-                if (listener != null) {
-                    listener.onDismiss();
-                }
                 setVisibility(View.GONE);
                 removeFromParent();
+                cookieListenerDismiss(getDismissType());
             }
 
             @Override
@@ -288,9 +297,24 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
             }
         });
 
-//        long speed = listener == null ? slideOutAnimationDuration : slideOutAnimationDuration / 2;
-//        slideOutAnimation.setDuration(speed);
         startAnimation(slideOutAnimation);
+    }
+
+    private int getDismissType() {
+        int dismissType = DismissType.PROGRAMATIC_DISMISS;
+        if(actionClickDismiss) {
+            dismissType = DismissType.USER_ACTION_CLICK;
+        }
+        else if(timeOutDismiss) {
+            dismissType = DismissType.DURATION_COMPLETE;
+        }
+        return dismissType;
+    }
+
+    private void cookieListenerDismiss(@DismissType int dismissType) {
+        if (dismissListener != null) {
+            dismissListener.onDismiss(dismissType);
+        }
     }
 
     private void removeFromParent() {
@@ -308,7 +332,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        if(!isSwipeable) {
+        if (!isSwipeable) {
             return true;
         }
 
@@ -365,7 +389,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                removeFromParent();
+                dismiss();
             }
 
             @Override
@@ -378,9 +402,5 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
                 // no implementation
             }
         };
-    }
-
-    public interface CookieBarDismissListener {
-        void onDismiss();
     }
 }
