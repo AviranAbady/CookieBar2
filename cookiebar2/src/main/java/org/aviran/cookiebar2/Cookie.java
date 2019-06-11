@@ -26,10 +26,10 @@ import org.aviran.cookiebar2.CookieBarDismissListener.DismissType;
 final class Cookie extends LinearLayout implements View.OnTouchListener {
     private Animation slideOutAnimation;
     private ViewGroup layoutCookie;
-    private TextView tvTitle;
-    private TextView tvMessage;
-    private ImageView ivIcon;
-    private TextView btnAction;
+    private TextView titleTextView;
+    private TextView messageTextView;
+    private ImageView iconImageView;
+    private TextView actionButton;
     private long duration = 2000;
     private int layoutGravity = Gravity.BOTTOM;
     private float initialDragX;
@@ -80,19 +80,21 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         }
 
         layoutCookie = findViewById(R.id.cookie);
-        tvTitle = findViewById(R.id.tv_title);
-        tvMessage = findViewById(R.id.tv_message);
-        ivIcon = findViewById(R.id.iv_icon);
-        btnAction = findViewById(R.id.btn_action);
+        titleTextView = findViewById(R.id.tv_title);
+        messageTextView = findViewById(R.id.tv_message);
+        iconImageView = findViewById(R.id.iv_icon);
+        actionButton = findViewById(R.id.btn_action);
 
-        validateLayoutIntegrity();
-        initDefaultStyle(getContext());
+        if(rootView == 0) {
+            validateLayoutIntegrity();
+            initDefaultStyle(getContext());
+        }
         layoutCookie.setOnTouchListener(this);
     }
 
     private void validateLayoutIntegrity() {
-        if (layoutCookie == null || tvTitle == null || tvMessage == null ||
-                ivIcon == null || btnAction == null) {
+        if (layoutCookie == null || titleTextView == null || messageTextView == null ||
+                iconImageView == null || actionButton == null) {
 
             throw new RuntimeException("Your custom cookie view is missing one of the default required views");
         }
@@ -119,9 +121,9 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         int backgroundColor = ThemeResolver.getColor(context, R.attr.cookieBackgroundColor,
                 ContextCompat.getColor(context, R.color.default_bg_color));
 
-        tvTitle.setTextColor(titleColor);
-        tvMessage.setTextColor(messageColor);
-        btnAction.setTextColor(actionColor);
+        titleTextView.setTextColor(titleColor);
+        messageTextView.setTextColor(messageColor);
+        actionButton.setTextColor(actionColor);
         layoutCookie.setBackgroundColor(backgroundColor);
     }
 
@@ -139,37 +141,37 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         dismissListener = params.dismissListener;
         final OnActionClickListener actionClickListener = params.onActionClickListener;
 
-        if (params.iconResId != 0) {
-            ivIcon.setVisibility(VISIBLE);
-            ivIcon.setBackgroundResource(params.iconResId);
+        if (params.iconResId != 0 && iconImageView != null) {
+            iconImageView.setVisibility(VISIBLE);
+            iconImageView.setBackgroundResource(params.iconResId);
             if (params.iconAnimator != null) {
-                params.iconAnimator.setTarget(ivIcon);
+                params.iconAnimator.setTarget(iconImageView);
                 params.iconAnimator.start();
             }
         }
 
-        if (!TextUtils.isEmpty(params.title)) {
-            tvTitle.setVisibility(VISIBLE);
-            tvTitle.setText(params.title);
+        if (titleTextView != null && !TextUtils.isEmpty(params.title)) {
+            titleTextView.setVisibility(VISIBLE);
+            titleTextView.setText(params.title);
             if (params.titleColor != 0) {
-                tvTitle.setTextColor(ContextCompat.getColor(getContext(), params.titleColor));
+                titleTextView.setTextColor(ContextCompat.getColor(getContext(), params.titleColor));
             }
-            setDefaultTextSize(tvTitle, R.attr.cookieTitleSize);
+            setDefaultTextSize(titleTextView, R.attr.cookieTitleSize);
         }
 
-        if (!TextUtils.isEmpty(params.message)) {
-            tvMessage.setVisibility(VISIBLE);
-            tvMessage.setText(params.message);
+        if (messageTextView != null && !TextUtils.isEmpty(params.message)) {
+            messageTextView.setVisibility(VISIBLE);
+            messageTextView.setText(params.message);
             if (params.messageColor != 0) {
-                tvMessage.setTextColor(ContextCompat.getColor(getContext(), params.messageColor));
+                messageTextView.setTextColor(ContextCompat.getColor(getContext(), params.messageColor));
             }
-            setDefaultTextSize(tvMessage, R.attr.cookieMessageSize);
+            setDefaultTextSize(messageTextView, R.attr.cookieMessageSize);
         }
 
-        if (!TextUtils.isEmpty(params.action) && actionClickListener != null) {
-            btnAction.setVisibility(VISIBLE);
-            btnAction.setText(params.action);
-            btnAction.setOnClickListener(new OnClickListener() {
+        if (actionButton != null && !TextUtils.isEmpty(params.action) && actionClickListener != null) {
+            actionButton.setVisibility(VISIBLE);
+            actionButton.setText(params.action);
+            actionButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     actionClickListener.onClick();
@@ -179,10 +181,10 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
             });
 
             if (params.actionColor != 0) {
-                btnAction.setTextColor(ContextCompat.getColor(getContext(), params.actionColor));
+                actionButton.setTextColor(ContextCompat.getColor(getContext(), params.actionColor));
             }
 
-            setDefaultTextSize(btnAction, R.attr.cookieActionSize);
+            setDefaultTextSize(actionButton, R.attr.cookieActionSize);
         }
 
         if (params.backgroundColor != 0) {
@@ -301,7 +303,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     }
 
     private int getDismissType() {
-        int dismissType = DismissType.PROGRAMATIC_DISMISS;
+        int dismissType = DismissType.PROGRAMMATIC_DISMISS;
         if(actionClickDismiss) {
             dismissType = DismissType.USER_ACTION_CLICK;
         }
