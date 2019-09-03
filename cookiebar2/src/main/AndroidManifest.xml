@@ -2,8 +2,6 @@
 
     package="org.aviran.cookiebar2">
 
-    <application
-        android:label="@string/app_name"
-        />
+    <application/>
 
 </manifest>
