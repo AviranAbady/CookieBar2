@@ -99,8 +99,13 @@ public class CookieBar {
                 ((Cookie) child).dismiss(new CookieBarDismissListener() {
                     @Override
                     public void onDismiss(int dismissType) {
-                        if(dismissListener != null) {
+                        if (dismissListener != null) {
                             dismissListener.onDismiss(DismissType.REPLACE_DISMISS);
+                        }
+                        // check cookie if attached
+                        if (cookie.getParent() != null) {
+                            ViewGroup parentExist = (ViewGroup) cookie.getParent();
+                            parentExist.removeView(cookie);
                         }
                         parent.addView(cookie);
                     }
@@ -198,11 +203,10 @@ public class CookieBar {
         /**
          * Sets cookie position
          *
-         * @deprecated As of CookieBar2 1.1.0, use
-         *             {@link #setCookiePosition(int)} instead.
-
          * @param layoutGravity Cookie position, use either CookieBar.TOP or CookieBar.BOTTOM
          * @return builder
+         * @deprecated As of CookieBar2 1.1.0, use
+         * {@link #setCookiePosition(int)} instead.
          */
         @Deprecated
         public Builder setLayoutGravity(int layoutGravity) {
