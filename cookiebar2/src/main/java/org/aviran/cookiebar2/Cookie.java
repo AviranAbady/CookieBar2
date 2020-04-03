@@ -3,6 +3,7 @@ package org.aviran.cookiebar2;
 import android.animation.Animator;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
 import android.support.annotation.AttrRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -269,7 +270,10 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     }
 
     public void dismiss(final CookieBarDismissListener listener) {
-        getHandler().removeCallbacksAndMessages(null);
+        @NonNull Handler viewHandler = getHandler();
+        if (viewHandler != null) {
+            getHandler().removeCallbacksAndMessages(null);
+        }
         if(listener != null) {
             dismissListener = listener;
         }
