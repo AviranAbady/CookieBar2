@@ -272,7 +272,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     public void dismiss(final CookieBarDismissListener listener) {
         @NonNull Handler viewHandler = getHandler();
         if (viewHandler != null) {
-            getHandler().removeCallbacksAndMessages(null);
+            viewHandler.removeCallbacksAndMessages(null);
         }
         if(listener != null) {
             dismissListener = listener;
