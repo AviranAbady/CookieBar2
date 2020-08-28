@@ -2,7 +2,7 @@ package org.aviran.cookiebar2;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.AttrRes;
+import androidx.annotation.AttrRes;
 
 class ThemeResolver {
 

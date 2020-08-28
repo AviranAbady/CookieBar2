@@ -3,8 +3,8 @@
     <string name="cookie_title">CookieBar title</string>
     <string name="cookie_message">Hey! I\'m cookie, delivering fancy interactive messages on Android since 2017.</string>
     <string name="cookie_action">Action</string>
-    <string name="top_cookie_title">Top cookie with an icon</string>
-    <string name="top_cookie_message">This is a top cookie with an icon.</string>
+    <string name="top_cookie_title">Top cookie with an icon!</string>
+    <string name="top_cookie_message">This is a top cookie with an icon (#%d)</string>
     <string name="custom_anim_cookie_title">This cookie has custom in/out animations</string>
     <string name="custom_anim_cookie_message">Did you notice it entered from the left?\nCan you guess how it will leave the screen?\nIf you guessed from the right, you\'re right!</string>
     <string name="bottom_cookie_title">Bottom cookie with and icon</string>

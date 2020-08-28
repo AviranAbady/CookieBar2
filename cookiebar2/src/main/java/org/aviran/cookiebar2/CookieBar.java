@@ -3,12 +3,12 @@ package org.aviran.cookiebar2;
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.app.Activity;
-import android.support.annotation.AnimRes;
-import android.support.annotation.AnimatorRes;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.StringRes;
+import androidx.annotation.AnimRes;
+import androidx.annotation.AnimatorRes;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.StringRes;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,12 +90,13 @@ public class CookieBar {
         }
 
         // if exists, remove existing cookie
-        int childCount = parent.getChildCount();
-        for (int i = 0; i < childCount; i++) {
+        int childCount = parent.getChildCount() - 1;
+        for (int i = childCount; i >= 0; i--) {
             View child = parent.getChildAt(i);
-            if (child instanceof Cookie) {
+            if (child instanceof Cookie && !((Cookie) child).isRemovalInProgress()) {
+                removeStaleCookies(parent, i);
                 Cookie currentCookie = (Cookie) child;
-                final CookieBarDismissListener dismissListener = currentCookie.getDismissListenr();
+                final CookieBarDismissListener dismissListener = currentCookie.getDismissListener();
                 ((Cookie) child).dismiss(new CookieBarDismissListener() {
                     @Override
                     public void onDismiss(int dismissType) {
@@ -110,6 +111,17 @@ public class CookieBar {
         }
 
         parent.addView(cookie);
+    }
+
+    private void removeStaleCookies(ViewGroup parent, int topCookie) {
+        for(int i = 0; i < topCookie; i++) {
+            View child = parent.getChildAt(i);
+            if (child instanceof Cookie && !((Cookie) child).isRemovalInProgress()) {
+                Cookie currentCookie = (Cookie) child;
+                currentCookie.silentDismiss();
+                return;
+            }
+        }
     }
 
     public View getView() {
