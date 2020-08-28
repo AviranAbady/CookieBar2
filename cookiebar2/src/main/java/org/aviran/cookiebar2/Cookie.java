@@ -3,13 +3,16 @@ package org.aviran.cookiebar2;
 import android.animation.Animator;
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.AttrRes;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.AttrRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -24,6 +27,10 @@ import android.widget.TextView;
 import org.aviran.cookiebar2.CookieBarDismissListener.DismissType;
 
 final class Cookie extends LinearLayout implements View.OnTouchListener {
+    //Used for debug purposes
+    //private static int cookieCounter = 0;
+    //private int cookieId;
+
     private Animation slideOutAnimation;
     private ViewGroup layoutCookie;
     private TextView titleTextView;
@@ -45,10 +52,12 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     private CookieBarDismissListener dismissListener;
     private boolean actionClickDismiss;
     private boolean timeOutDismiss;
-
+    private boolean isCookieRemovalInProgress;
+    private Handler handler = new Handler();
 
     public Cookie(@NonNull final Context context) {
         this(context, null);
+//        cookieId = ++cookieCounter;
     }
 
     public Cookie(@NonNull final Context context, @Nullable final AttributeSet attrs) {
@@ -201,6 +210,21 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
 
         createInAnim();
         createOutAnim();
+
+//        Log.i("Cookiebar", "Dismiss delay activated for " + cookieId);
+        if (isAutoDismissEnabled) {
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    timeOutDismiss = true;
+                    dismiss();
+                }
+            }, duration);
+        }
+    }
+
+    public boolean isRemovalInProgress() {
+        return isCookieRemovalInProgress;
     }
 
     private void setDefaultTextSize(TextView textView, @AttrRes int attr) {
@@ -225,33 +249,6 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     private void createInAnim() {
         int animationResId = layoutGravity == Gravity.BOTTOM ? animationInBottom : animationInTop;
         Animation slideInAnimation = AnimationUtils.loadAnimation(getContext(), animationResId);
-        slideInAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                // no implementation
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                if (!isAutoDismissEnabled) {
-                    return;
-                }
-
-                postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        timeOutDismiss = true;
-                        dismiss();
-                    }
-                }, duration);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-                // no implementation
-            }
-        });
-
         setAnimation(slideInAnimation);
     }
 
@@ -264,12 +261,14 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         dismiss(null);
     }
 
-    public CookieBarDismissListener getDismissListenr() {
+    public CookieBarDismissListener getDismissListener() {
         return dismissListener;
     }
 
     public void dismiss(final CookieBarDismissListener listener) {
-        getHandler().removeCallbacksAndMessages(null);
+        isCookieRemovalInProgress = true;
+//        Log.i("CookieBar", "Removing cookie #" +  cookieId);
+        handler.removeCallbacksAndMessages(null);
         if(listener != null) {
             dismissListener = listener;
         }
@@ -302,6 +301,14 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         startAnimation(slideOutAnimation);
     }
 
+    void silentDismiss() {
+//        Log.i("Cookiebar", "Removing stale cooke " + cookieId);
+        isCookieRemovalInProgress = true;
+        handler.removeCallbacksAndMessages(null);
+        cookieListenerDismiss(DismissType.REPLACE_DISMISS);
+        removeFromParent();
+    }
+
     private int getDismissType() {
         int dismissType = DismissType.PROGRAMMATIC_DISMISS;
         if(actionClickDismiss) {
@@ -320,7 +327,7 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
     }
 
     private void removeFromParent() {
-        postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 ViewParent parent = getParent();

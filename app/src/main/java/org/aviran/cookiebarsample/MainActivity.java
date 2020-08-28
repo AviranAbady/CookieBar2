@@ -1,7 +1,7 @@
 package org.aviran.cookiebarsample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +12,8 @@ import org.aviran.cookiebar2.CookieBarDismissListener;
 import org.aviran.cookiebar2.OnActionClickListener;
 
 public class MainActivity extends AppCompatActivity {
+
+    int topCookieCounter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
                 CookieBar.build(MainActivity.this)
                         .setTitle(R.string.top_cookie_title)
                         .setTitleColor(R.color.yellow)
-                        .setMessage(R.string.top_cookie_message)
+                        .setMessage(getString(R.string.top_cookie_message, ++topCookieCounter))
                         .setIcon(R.drawable.ic_android_white_48dp)
                         .setDuration(5000)
                         .setCookieListener(new CookieBarDismissListener() {
