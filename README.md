@@ -1,5 +1,9 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CookieBar2-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6122) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6474fc01133444e0b6f615d9b1af8589)](https://www.codacy.com/app/AviranAbady/CookieBar2?utm_source=github.com&utm_medium=referral&utm_content=AviranAbady/CookieBar2&utm_campaign=badger) [![AndroidWeekly335](https://raw.githubusercontent.com/AviranAbady/storage/master/AndroidWeekly335.png)](http://androidweekly.net/issues/issue-335)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CookieBar2-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6122)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6474fc01133444e0b6f615d9b1af8589)](https://www.codacy.com/app/AviranAbady/CookieBar2?utm_source=github.com&utm_medium=referral&utm_content=AviranAbady/CookieBar2&utm_campaign=badger)
+[![AndroidWeekly335](https://img.shields.io/badge/Android%20Weekly-%23335-brightgreen)](http://androidweekly.net/issues/issue-335)
 [![](https://jitpack.io/v/AviranAbady/CookieBar2.svg)](https://jitpack.io/#AviranAbady/CookieBar2)
+[![](https://img.shields.io/bintray/dt/aviran/projects/cookiebar2)](https://bintray.com/beta/#/aviran/projects/cookiebar2?tab=statistics)
+
 
 CookieBar 2
 ===============
