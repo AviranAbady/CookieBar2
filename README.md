@@ -1,4 +1,5 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CookieBar2-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6122) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6474fc01133444e0b6f615d9b1af8589)](https://www.codacy.com/app/AviranAbady/CookieBar2?utm_source=github.com&utm_medium=referral&utm_content=AviranAbady/CookieBar2&utm_campaign=badger) [![AndroidWeekly335](https://raw.githubusercontent.com/AviranAbady/storage/master/AndroidWeekly335.png)](http://androidweekly.net/issues/issue-335)
+[![](https://jitpack.io/v/AviranAbady/CookieBar2.svg)](https://jitpack.io/#AviranAbady/CookieBar2)
 
 CookieBar 2
 ===============
@@ -27,7 +28,7 @@ Main differences from the original Cookiebar library are:
 ## Create a simple cookie
 ### Using Kotlin
 ```kotlin
-CookieBar.build(this@MainActivity)
+CookieBar.build(activity)           // Provide activity, using this@MainActivity / getActivity() or otherwise
          .setTitle("TITLE")         // String resources are also supported
          .setMessage("MESSAGE")     // i.e. R.string.message
          .show()                    // Cookies are displayed at the top by default
