@@ -11,7 +11,7 @@ import org.aviran.cookiebar2.CookieBar;
 import org.aviran.cookiebar2.CookieBarDismissListener;
 import org.aviran.cookiebar2.OnActionClickListener;
 
-public class MainActivity extends AppCompatActivity {
+public class JavaSampleActivity extends AppCompatActivity {
 
     int topCookieCounter = 0;
 
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         btnTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CookieBar.build(MainActivity.this)
+                CookieBar.build(JavaSampleActivity.this)
                         .setTitle(R.string.top_cookie_title)
                         .setTitleColor(R.color.yellow)
                         .setMessage(getString(R.string.top_cookie_message, ++topCookieCounter))
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 }
 
-                                Toast.makeText(MainActivity.this, desc, Toast.LENGTH_LONG).show();
+                                Toast.makeText(JavaSampleActivity.this, desc, Toast.LENGTH_LONG).show();
                             }
                         })
                         .show();
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         btnBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CookieBar.build(MainActivity.this)
+                CookieBar.build(JavaSampleActivity.this)
                         .setDuration(5000)
                         .setTitle(R.string.bottom_cookie_title)
                         .setIcon(R.mipmap.ic_launcher)
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         btnCustomAnimation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CookieBar.build(MainActivity.this)
+                CookieBar.build(JavaSampleActivity.this)
                         .setTitle(R.string.custom_anim_cookie_title)
                         .setMessage(R.string.custom_anim_cookie_message)
                         .setIcon(R.drawable.ic_android_white_48dp)
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         btnBottomAnimated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CookieBar.build(MainActivity.this)
+                CookieBar.build(JavaSampleActivity.this)
                         .setTitle(R.string.fancy_cookie_title)
                         .setMessage(R.string.fancy_cookie_message)
                         .setIcon(R.drawable.ic_settings_white_48dp)
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                CookieBar.build(MainActivity.this)
+                CookieBar.build(JavaSampleActivity.this)
                         .setCustomView(R.layout.custom_cookie)
                         .setCustomViewInitializer(new CookieBar.CustomViewInitializer() {
                             @Override
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Close", new OnActionClickListener() {
                             @Override
                             public void onClick() {
-                                CookieBar.dismiss(MainActivity.this);
+                                CookieBar.dismiss(JavaSampleActivity.this);
                             }
                         })
                         .setTitle(R.string.custom_view_cookie_title)
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.activity_main).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CookieBar.dismiss(MainActivity.this);
+                CookieBar.dismiss(JavaSampleActivity.this);
             }
         });
 
