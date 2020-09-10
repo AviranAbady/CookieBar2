@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="org.aviran.cookiebarsample.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first"/>
+        android:name="org.aviran.cookiebarsample.JavaDemoFragment"
+        android:label="@string/main_fragment_label"
+        tools:layout="@layout/fragment_layout"/>
 </navigation>
