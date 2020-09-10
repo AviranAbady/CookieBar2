@@ -1,30 +1,55 @@
 package org.aviran.cookiebarsample;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.aviran.cookiebar2.CookieBar;
 import org.aviran.cookiebar2.CookieBarDismissListener;
 import org.aviran.cookiebar2.OnActionClickListener;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.concurrent.TimeoutException;
 
-    int topCookieCounter = 0;
+public class JavaDemoFragment extends Fragment {
+
+    private int topCookieCounter = 0;
+    private TextView infoTextView;
+
+    public JavaDemoFragment() {
+        // Required empty public constructor
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    }
 
-        Button btnTop = findViewById(R.id.btn_top);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_layout, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View rootView, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(rootView, savedInstanceState);
+        this.infoTextView = rootView.findViewById(R.id.infoTextView);
+
+        Button btnTop = rootView.findViewById(R.id.btnTop);
         btnTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CookieBar.build(MainActivity.this)
+                CookieBar.build(getActivity())
                         .setTitle(R.string.top_cookie_title)
                         .setTitleColor(R.color.yellow)
                         .setMessage(getString(R.string.top_cookie_message, ++topCookieCounter))
@@ -54,18 +79,18 @@ public class MainActivity extends AppCompatActivity {
 
                                 }
 
-                                Toast.makeText(MainActivity.this, desc, Toast.LENGTH_LONG).show();
+                                infoTextView.setText(desc);
                             }
                         })
                         .show();
             }
         });
 
-        final Button btnBottom = findViewById(R.id.btn_bottom);
+        final Button btnBottom = rootView.findViewById(R.id.btnBottom);
         btnBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CookieBar.build(MainActivity.this)
+                CookieBar.build(getActivity())
                         .setDuration(5000)
                         .setTitle(R.string.bottom_cookie_title)
                         .setIcon(R.mipmap.ic_launcher)
@@ -77,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction(R.string.cookie_action, new OnActionClickListener() {
                             @Override
                             public void onClick() {
-                                Toast.makeText(getApplicationContext(), "Action Engaged!", Toast.LENGTH_LONG).show();
+                               infoTextView.setText(R.string.action_engaged);
                             }
                         })
                         .show();
@@ -85,11 +110,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Button btnCustomAnimation = findViewById(R.id.btn_custom_anim);
+        Button btnCustomAnimation = rootView.findViewById(R.id.btnCustomAnim);
         btnCustomAnimation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CookieBar.build(MainActivity.this)
+                CookieBar.build(getActivity())
                         .setTitle(R.string.custom_anim_cookie_title)
                         .setMessage(R.string.custom_anim_cookie_message)
                         .setIcon(R.drawable.ic_android_white_48dp)
@@ -103,11 +128,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Button btnBottomAnimated = findViewById(R.id.btn_bottom_animated);
+        Button btnBottomAnimated = rootView.findViewById(R.id.btnBottomAnimated);
         btnBottomAnimated.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CookieBar.build(MainActivity.this)
+                CookieBar.build(getActivity())
                         .setTitle(R.string.fancy_cookie_title)
                         .setMessage(R.string.fancy_cookie_message)
                         .setIcon(R.drawable.ic_settings_white_48dp)
@@ -121,20 +146,20 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("OPEN SETTINGS", new OnActionClickListener() {
                             @Override
                             public void onClick() {
-                                Toast.makeText(getApplicationContext(), "Action Engaged!", Toast.LENGTH_LONG).show();
+                                infoTextView.setText(R.string.action_engaged);
                             }
                         })
                         .show();
             }
         });
 
-        Button btnCustomView = findViewById(R.id.btn_custom_view);
+        Button btnCustomView = rootView.findViewById(R.id.btnCustomView);
         btnCustomView.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
-                CookieBar.build(MainActivity.this)
+                CookieBar.build(getActivity())
                         .setCustomView(R.layout.custom_cookie)
                         .setCustomViewInitializer(new CookieBar.CustomViewInitializer() {
                             @Override
@@ -161,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Close", new OnActionClickListener() {
                             @Override
                             public void onClick() {
-                                CookieBar.dismiss(MainActivity.this);
+                                CookieBar.dismiss(getActivity());
                             }
                         })
                         .setTitle(R.string.custom_view_cookie_title)
@@ -173,13 +198,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.activity_main).setOnClickListener(new View.OnClickListener() {
+        rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CookieBar.dismiss(MainActivity.this);
+                CookieBar.dismiss(getActivity());
             }
         });
-
-
     }
 }

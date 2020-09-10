@@ -39,7 +39,7 @@ CookieBar.build(activity)           // Provide activity, using this@MainActivity
 ```
 ### Using Java
 ```java
-CookieBar.build(MainActivity.this)
+CookieBar.build(getactivty())
          .setTitle("TITLE")
          .setMessage("MESSAGE")
          .setCookiePosition(CookieBar.BOTTOM)  // Cookie will be displayed at the bottom
@@ -47,41 +47,61 @@ CookieBar.build(MainActivity.this)
 ```
 
 ## Customize colors, icon, icon animation, call to action button, display duration
-```java
-CookieBar.build(MainActivity.this)
+```kotlin
+CookieBar.build(activity)
          .setTitle(R.string.title)
          .setTitleColor(R.color.green)
          .setIcon(R.drawable.icon)
          .setIconAnimation(R.animator.spin)
          .setMessage(R.string.message)
-         .setAction(R.string.action_text, new OnActionClickListener() {
-             @Override
-             public void onClick() {
-                // Do something
-             }
-         })
+         .setAction(R.string.action_text) { 
+              // Action code - Do something
+         }
          .setDuration(5000) // 5 seconds
-         .show();
+         .show()
 ```
 
 ## Customize in/out animation
-```java
-CookieBar.build(MainActivity.this)
+```kotlin
+CookieBar.build(activity)
          .setTitle(R.string.title)
          .setMessage(R.string.message)
          .setAnimationIn(android.R.anim.slide_in_left, android.R.anim.slide_in_left)
          .setAnimationOut(android.R.anim.slide_out_right, android.R.anim.slide_out_right)
-         .show();
+         .show()
 ```
 
 ## Programmatically dismiss cookies currently being displayed
-```java
-CookieBar.dismiss(MainActivity.this);
+```kotlin
+CookieBar.dismiss(activity)
 
 ```
 
 
 ## Create a cookie with a custom layout - Create a dialog!
+```kotlin
+CookieBar.build(activity)
+         .setCustomView(R.layout.custom_cookie)
+         .setCustomViewInitializer { view ->
+             val btnNew = view.findViewById<Button>(R.id.custom_cookie_btn_new)
+             val btnOpen = view.findViewById<Button>(R.id.custom_cookie_btn_open)
+             val btnSave = view.findViewById<Button>(R.id.custom_cookie_btn_save)
+             val btnListener = View.OnClickListener { view ->
+                 val button = view as Button
+                 button.setText(R.string.clicked)
+             }
+             btnNew.setOnClickListener(btnListener)
+             btnOpen.setOnClickListener(btnListener)
+             btnSave.setOnClickListener(btnListener)
+         }
+         .setAction("Close") { CookieBar.dismiss(activity) }
+         .setTitle(R.string.custom_view_cookie_title)
+         .setMessage(R.string.custom_view_cookie_message)
+         .setEnableAutoDismiss(false)
+         .setSwipeToDismiss(false)
+         .setCookiePosition(Gravity.BOTTOM)
+         .show()
+```
 ```java
 /* setCustomView -  Set the layout resource for your custom cookie view.
    setCustomViewInitializer - Called after layout inflation, for subview setup. */
