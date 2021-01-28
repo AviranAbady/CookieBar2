@@ -170,22 +170,22 @@ public class CookieBar {
             return this;
         }
 
-        public Builder setTitleColor(@ColorRes int titleColor) {
+        public Builder setTitleColor(String titleColor) {
             params.titleColor = titleColor;
             return this;
         }
 
-        public Builder setMessageColor(@ColorRes int messageColor) {
+        public Builder setMessageColor(String messageColor) {
             params.messageColor = messageColor;
             return this;
         }
 
-        public Builder setBackgroundColor(@ColorRes int backgroundColor) {
+        public Builder setBackgroundColor(String backgroundColor) {
             params.backgroundColor = backgroundColor;
             return this;
         }
 
-        public Builder setActionColor(@ColorRes int actionColor) {
+        public Builder setActionColor(String actionColor) {
             params.actionColor = actionColor;
             return this;
         }
@@ -292,10 +292,10 @@ public class CookieBar {
         public boolean enableSwipeToDismiss = true;
         public boolean enableAutoDismiss = true;
         public int iconResId;
-        public int backgroundColor;
-        public int titleColor;
-        public int messageColor;
-        public int actionColor;
+        public String backgroundColor;
+        public String titleColor;
+        public String messageColor;
+        public String actionColor;
         public long duration = 2000;
         public int cookiePosition = Gravity.TOP;
         public int customViewResource;
