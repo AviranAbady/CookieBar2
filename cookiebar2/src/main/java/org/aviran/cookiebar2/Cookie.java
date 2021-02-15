@@ -168,6 +168,8 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            } else if (params.titleColorRes != 0){
+                titleTextView.setTextColor(ContextCompat.getColor(getContext(), params.titleColorRes));
             }
             setDefaultTextSize(titleTextView, R.attr.cookieTitleSize);
         }
@@ -181,6 +183,8 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            } else if (params.messageColorRes != 0){
+                messageTextView.setTextColor(ContextCompat.getColor(getContext(), params.messageColorRes));
             }
             setDefaultTextSize(messageTextView, R.attr.cookieMessageSize);
         }
@@ -203,6 +207,8 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            } else if (params.actionColorRes != 0){
+                actionButton.setTextColor(ContextCompat.getColor(getContext(), params.actionColorRes));
             }
 
             setDefaultTextSize(actionButton, R.attr.cookieActionSize);
@@ -215,6 +221,8 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else if (params.backgroundColorRes != 0){
+            layoutCookie.setBackgroundColor(ContextCompat.getColor(getContext(), params.backgroundColorRes));
         }
 
         int defaultPadding = getContext().getResources().getDimensionPixelSize(R.dimen.default_padding);
