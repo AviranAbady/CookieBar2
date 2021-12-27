@@ -1,22 +1,31 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CookieBar2-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6122)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6474fc01133444e0b6f615d9b1af8589)](https://www.codacy.com/app/AviranAbady/CookieBar2?utm_source=github.com&utm_medium=referral&utm_content=AviranAbady/CookieBar2&utm_campaign=badger)
 [![AndroidWeekly335](https://img.shields.io/badge/Android%20Weekly-%23335-brightgreen)](http://androidweekly.net/issues/issue-335)
 [![](https://jitpack.io/v/AviranAbady/CookieBar2.svg)](https://jitpack.io/#AviranAbady/CookieBar2)
-[![](https://img.shields.io/bintray/dt/aviran/projects/cookiebar2)](https://bintray.com/beta/#/aviran/projects/cookiebar2?tab=statistics)
 
 
 CookieBar 2
 ===============
-CookieBar is a lightweight library for showing a brief message at the top or bottom of the screen.<br/><br/>
+CookieBar is a lightweight UI/UX library for displaying an interactive message on the screen.<br/><br/>
 
 ```gradle
-implementation 'org.aviran.cookiebar2:cookiebar2:1.1.4'
+implementation 'org.aviran.cookiebar2:cookiebar2:1.1.5'
+```
+CookieBar2 is now hosted in Maven Central, make sure you have `mavenCentral()` added to your repositories in `build.gradle`
+
+```
+buildscript {
+    ...
+    repositories {
+        ...
+        mavenCentral()
+    }
+}
 ```
 
 ## Screenshot
 <img src="https://raw.githubusercontent.com/AviranAbady/storage/master/cookiebar2_1.1.0.gif">
 
-Main differences from the original Cookiebar library are:
+Latest additions to CookieBar2:
 
 * Swipe to dismiss has been added.
 * Programmatic dismiss functionality added.

@@ -1,6 +1,8 @@
 
 # Created by https://www.gitignore.io/api/android,androidstudio
-
+#gradle.properties
+#gradlew
+#gradlew.bat
 
 ### Android ###
 # Built application files
@@ -170,8 +172,6 @@ fabric.properties
 
 # End of https://www.gitignore.io/api/android,androidstudio
 
-deploy.gradle
-deploy.properties
-bintray.properties
-
+#gradle/*
+publishing-scripts/*
 

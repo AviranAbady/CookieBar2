@@ -16,9 +16,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:src="@mipmap/ic_launcher"
+
         app:layout_constraintBottom_toTopOf="@+id/custom_cookie_btn_new"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="36dp" />
+
+
+        app:layout_constraintEnd_toEndOf="@+id/custom_cookie_btn_new"
+        app:layout_constraintStart_toStartOf="@+id/custom_cookie_btn_new"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -54,10 +58,12 @@
         android:id="@+id/custom_cookie_btn_new"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:text="@string/newBtn"
         app:layout_constraintBottom_toTopOf="@+id/custom_cookie_btn_open"
-        app:layout_constraintTop_toBottomOf="@+id/iv_icon"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_icon" />
 
     <Button
         android:id="@+id/custom_cookie_btn_open"
@@ -65,8 +71,8 @@
         android:layout_height="wrap_content"
         android:text="@string/open"
         app:layout_constraintBottom_toTopOf="@+id/custom_cookie_btn_save"
-        app:layout_constraintTop_toBottomOf="@+id/custom_cookie_btn_new"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintStart_toStartOf="@+id/custom_cookie_btn_new"
+        app:layout_constraintTop_toBottomOf="@+id/custom_cookie_btn_new" />
 
     <Button
         android:id="@+id/custom_cookie_btn_save"
@@ -75,8 +81,8 @@
         android:layout_marginBottom="8dp"
         android:text="@string/save"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/custom_cookie_btn_open"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintStart_toStartOf="@+id/custom_cookie_btn_open"
+        app:layout_constraintTop_toBottomOf="@+id/custom_cookie_btn_open" />
 
     <TextView
         android:id="@+id/btn_action"

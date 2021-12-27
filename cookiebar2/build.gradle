@@ -1,17 +1,15 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'maven-publish'
 
-group='com.github.AviranAbady'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.2"
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 31
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
@@ -28,11 +26,34 @@ dependencies {
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+}
+
+ext {
+    PUBLISH_GROUP_ID = 'org.aviran.cookiebar2'
+    PUBLISH_VERSION = '1.1.5'
+    PUBLISH_ARTIFACT_ID = 'cookiebar2'
 }
 
 
 
-if (project.file('../deploy.gradle').exists()) {
-    apply from: '../deploy.gradle'
+def publish_module_path = "${rootProject.projectDir}/apublishing-scripts/publish-module.gradle"
+
+if (project.file(publish_module_path).exists()) {
+    apply from: "${publish_module_path}"
+}
+else {
+    project(':cookiebar2').afterEvaluate {
+        publishing {
+            publications {
+
+                release(MavenPublication) {
+                    from components.release
+                    groupId = PUBLISH_GROUP_ID
+                    artifactId = PUBLISH_ARTIFACT_ID
+                    version = PUBLISH_GROUP_ID
+                }
+            }
+        }
+    }
 }

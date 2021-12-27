@@ -2,27 +2,43 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.3.72'
+        kotlin_version = '1.5.20'
+        dokka_version = '1.6.0'
     }
     repositories {
-        jcenter()
+        mavenCentral()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.2'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+        classpath 'com.android.tools.build:gradle:7.0.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:${dokka_version}"
     }
+}
+
+plugins {
+    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+    id("org.jetbrains.dokka") version "1.6.0"
 }
 
 allprojects {
     repositories {
-        jcenter()
         google()
+        mavenCentral()
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+task get_wrapper(type: Wrapper) {
+    gradleVersion = '7.0.2'
+}
+
+
+def publish_module_path = "${rootDir}/publishing-scripts/apublish-root.gradle"
+
+if (project.file(publish_module_path).exists()) {
+    apply from: "${publish_module_path}"
 }

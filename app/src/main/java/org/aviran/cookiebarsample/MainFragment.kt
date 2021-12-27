@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_layout.*
 import org.aviran.cookiebar2.CookieBar
@@ -17,7 +16,7 @@ import org.aviran.cookiebar2.CookieBarDismissListener.DismissType
  */
 class MainFragment : Fragment() {
 
-    var topCookieCounter = 0
+    private var topCookieCounter = 0
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
