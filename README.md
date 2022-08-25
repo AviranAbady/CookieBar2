@@ -1,6 +1,7 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-CookieBar2-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/6122)
 [![AndroidWeekly335](https://img.shields.io/badge/Android%20Weekly-%23335-brightgreen)](http://androidweekly.net/issues/issue-335)
 [![](https://jitpack.io/v/AviranAbady/CookieBar2.svg)](https://jitpack.io/#AviranAbady/CookieBar2)
+[![Discord - Support](https://img.shields.io/badge/Discord-Support-7289da )](https://discord.gg/aDvkVpRhmt)
 
 
 CookieBar 2
