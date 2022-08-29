@@ -161,8 +161,14 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         if (titleTextView != null && !TextUtils.isEmpty(params.title)) {
             titleTextView.setVisibility(VISIBLE);
             titleTextView.setText(params.title);
-            if (params.titleColor != 0) {
-                titleTextView.setTextColor(ContextCompat.getColor(getContext(), params.titleColor));
+            if (params.titleColor != null) {
+                try {
+                    titleTextView.setTextColor(Color.parseColor(params.titleColor));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (params.titleColorRes != 0){
+                titleTextView.setTextColor(ContextCompat.getColor(getContext(), params.titleColorRes));
             }
             setDefaultTextSize(titleTextView, R.attr.cookieTitleSize);
         }
@@ -170,8 +176,14 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
         if (messageTextView != null && !TextUtils.isEmpty(params.message)) {
             messageTextView.setVisibility(VISIBLE);
             messageTextView.setText(params.message);
-            if (params.messageColor != 0) {
-                messageTextView.setTextColor(ContextCompat.getColor(getContext(), params.messageColor));
+            if (params.messageColor != null) {
+                try {
+                    messageTextView.setTextColor(Color.parseColor(params.messageColor));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (params.messageColorRes != 0){
+                messageTextView.setTextColor(ContextCompat.getColor(getContext(), params.messageColorRes));
             }
             setDefaultTextSize(messageTextView, R.attr.cookieMessageSize);
         }
@@ -188,16 +200,28 @@ final class Cookie extends LinearLayout implements View.OnTouchListener {
                 }
             });
 
-            if (params.actionColor != 0) {
-                actionButton.setTextColor(ContextCompat.getColor(getContext(), params.actionColor));
+            if (params.actionColor != null) {
+                try {
+                    actionButton.setTextColor(Color.parseColor(params.actionColor));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (params.actionColorRes != 0){
+                actionButton.setTextColor(ContextCompat.getColor(getContext(), params.actionColorRes));
             }
 
             setDefaultTextSize(actionButton, R.attr.cookieActionSize);
         }
 
-        if (params.backgroundColor != 0) {
-            layoutCookie
-                    .setBackgroundColor(ContextCompat.getColor(getContext(), params.backgroundColor));
+        if (params.backgroundColor != null) {
+            try {
+                layoutCookie
+                        .setBackgroundColor(Color.parseColor(params.backgroundColor));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if (params.backgroundColorRes != 0){
+            layoutCookie.setBackgroundColor(ContextCompat.getColor(getContext(), params.backgroundColorRes));
         }
 
         int defaultPadding = getContext().getResources().getDimensionPixelSize(R.dimen.default_padding);
